@@ -21,7 +21,6 @@
             @input="updateItems"/>
     </v-container>
 </template>
-</template>
 
 // npm install axios --legacy-peer-deps
 
