@@ -2,6 +2,7 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 
 import BoardRoutes from '@/board/router/BoardRoutes'
+import ProductRoutes from '@/product/router/ProductRoutes'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -18,6 +19,7 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
   },
   ...BoardRoutes,
+  ...ProductRoutes,
 ]
 
 const router = createRouter({
