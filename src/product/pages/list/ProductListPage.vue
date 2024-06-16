@@ -1,9 +1,7 @@
 <template>
   <v-container>
     <h2>BZZ Hotel</h2>
-    <router-link :to="{ name: 'ProductRegisterPage' }">
-      호텔 등록
-    </router-link>
+    <p>호텔 등록</p>
     <v-row v-if="productList.length > 0">
       <v-col v-for="hotel in hotels" :key="hotel.productId" cols="12" class="mb-4">
         <v-card>

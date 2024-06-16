@@ -6,8 +6,6 @@ import { REQUEST_PRODUCT_LIST_TO_DJANGO } from "./mutation-types";
 
 export type ProductActions = {
     requestProductListToDjango(context: ActionContext<ProductState, any>): Promise<void>
-    requestCreateProductToDjango(context: ActionContext<ProductState, unknown>,
-        imageFormData: FormData): Promise<AxiosResponse>
 }
 
 const actions: ProductActions = {
@@ -21,24 +19,6 @@ const actions: ProductActions = {
             throw error
         }
     },
-    async requestCreateProductToDjango(context: ActionContext<ProductState, unknown>,
-        imageFormData: FormData): Promise<AxiosResponse> {
-        try {
-            console.log('requestCreateProductToDjango()')
-            const res: AxiosResponse = await axiosInst.djangoAxiosInst.post(
-                'product/register', imageFormData, {
-                    headers: {
-                        'Content-Type' : 'multipart/form-data'
-                    }
-                }
-            )
-            console.log('응답 데이터:', res.data)
-            return res
-        } catch (error) {
-            console.error('requestCreateProductToDjango():', error)
-            throw error
-        }
-    }
 }
 
 export default actions
