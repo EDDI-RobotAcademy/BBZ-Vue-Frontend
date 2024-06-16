@@ -2,9 +2,9 @@
     <v-container>
         <h2>BBZ HOTEL</h2>
         <div style="text-align: left; margin: 15px;">
-            <p>
+            <router-link :to="{ name: 'BoardRegisterPage' }">
                 게시물 작성
-            </p>
+            </router-link>
         </div>
         <v-data-table
             v-model:items-per-page="perPage"
@@ -46,6 +46,9 @@ export default {
     },
     methods: {
         ...mapActions(boardModule, ['requestBoardListToDjango']),
+        readRow (event, { item }) {
+            console.log('nothing to do!')
+        }
     },
     data () {
         return {
