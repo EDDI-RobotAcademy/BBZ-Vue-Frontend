@@ -1,4 +1,4 @@
-import ProductListPage from "../pages/list/ProductListPage.vue"
+import ProductListPage from "@/product/pages/list/ProductListPage.vue"
 
 const ProductRoutes = [
     {
