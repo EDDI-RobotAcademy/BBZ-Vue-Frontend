@@ -1,100 +1,81 @@
 <template>
-    <v-container>
-      <v-row v-for="hotel in hotels" :key="hotel.id" class="mb-4">
-        <v-col cols="12">
-          <v-card>
-            <v-card-title>{{ hotel.name }}</v-card-title>
-            <v-card-subtitle>{{ hotel.location }}</v-card-subtitle>
-            <v-divider></v-divider>
-            <v-card-text>
-              <v-row>
-                <v-col cols="4">
-                  <v-img :src="hotel.image" alt="Hotel image" class="hotel-image"></v-img>
-                </v-col>
-                <v-col cols="8">
-                  <p>{{ hotel.description }}</p>
-                </v-col>
-              </v-row>
-            </v-card-text>
-            <v-divider></v-divider>
-            <v-card-actions>
-              <v-row>
-                <v-col
-                  v-for="room in hotel.rooms"
-                  :key="room.id"
-                  cols="auto"
-                >
-                  <v-btn @click="showRoomDetails(room)">
-                    {{ room.type }}
-                  </v-btn>
-                </v-col>
-              </v-row>
-            </v-card-actions>
-          </v-card>
-        </v-col>
-      </v-row>
-  
-      <v-dialog v-model="dialog" max-width="500px">
+  <v-container>
+    <h2>BZZ Hotel</h2>
+    <p>호텔 등록</p>
+    <v-row v-if="productList.length > 0">
+      <v-col v-for="hotel in hotels" :key="hotel.productId" cols="12" class="mb-4">
         <v-card>
-          <v-card-title>{{ selectedRoom.type }}</v-card-title>
+          <v-card-title>{{ hotel.productName }}</v-card-title>
+          <v-card-subtitle>{{ hotel.productLocation }}</v-card-subtitle>
+          <v-divider></v-divider>
           <v-card-text>
-            <div>{{ selectedRoom.description }}</div>
-            <div>Price: {{ selectedRoom.price }}</div>
+            <v-row>
+              <v-col cols="4">
+                <v-img src="@/assets/images/fixed/mario.png" aspect-ratio="1" class="grey lighten-2">
+                  <template v-slot:placeholder>
+                    <v-row class="fill-height ma-0" align="center" justify="center">
+                      <v-progress-circular indeterminate color="grey lighten-5"/>
+                    </v-row>
+                  </template>
+                </v-img>
+              </v-col>
+              <v-col cols="8">
+                <p>{{ hotel.productActivity }}</p>
+              </v-col>
+            </v-row>
           </v-card-text>
+          <v-divider></v-divider>
           <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="primary" @click="dialog = false">Close</v-btn>
+              <v-row class="ml-1">{{ hotel.productPrice }}원</v-row>
           </v-card-actions>
         </v-card>
-      </v-dialog>
-    </v-container>
-  </template>
+      </v-col>
+    </v-row>
+    <v-row v-else>
+      <v-col cols="12" class="text-center">
+        <v-alert type="info">등록된 호텔이 없습니다!</v-alert>
+      </v-col>
+    </v-row>
+  </v-container>
+</template>
   
-  <script>
-  export default {
-    data() {
-      return {
-        dialog: false,
-        selectedRoom: {},
-        hotels: [
-          {
-            id: 1,
-            name: 'Hotel 1',
-            location: 'Seoul, Korea',
-            description: 'A luxurious hotel in Seoul.',
-            image: 'https://via.placeholder.com/150',
-            rooms: [
-              { id: 1, type: 'Deluxe Room', description: 'A deluxe room with a view.', price: '$200' },
-              { id: 2, type: 'Suite', description: 'A spacious suite.', price: '$400' },
-            ],
-          },
-          {
-            id: 2,
-            name: 'Hotel 2',
-            location: 'Seoul, Korea',
-            description: 'Another luxurious hotel in Seoul.',
-            image: 'https://via.placeholder.com/150',
-            rooms: [
-              { id: 3, type: 'Standard Room', description: 'A standard room.', price: '$150' },
-              { id: 4, type: 'Executive Suite', description: 'An executive suite.', price: '$500' },
-            ],
-          },
-        ],
-      };
+<script>
+
+import { mapActions, mapState } from 'vuex'
+
+const productModule = 'productModule'
+
+export default {
+    computed: {
+      ...mapState(productModule, ['productList']),
+    },
+    mounted () {
+      this.requestProductListToDjango()
     },
     methods: {
-      showRoomDetails(room) {
-        this.selectedRoom = room;
-        this.dialog = true;
-      },
+      ...mapActions(productModule, ['requestProductListToDjango']),
     },
-  };
-  </script>
+    data () {
+      return {
+        headerTitle: [
+          {
+            title: 'No',
+            align: 'start',
+            sortable: true,
+            key: 'productId',
+          },
+          { title: '호텔 이름', align: 'end', key: 'productName' },
+          { title: '호텔 가격', align: 'end', key: 'productPrice'},
+        ]
+      }
+    }
+  }
+</script>
   
-  <style scoped>
+<style scoped>
   .hotel-image {
     width: 100%;
     height: auto;
   }
-  </style>
+</style>
   
