@@ -26,7 +26,7 @@ const actions: ProductActions = {
         try {
             console.log('requestCreateProductToDjango()')
             const res: AxiosResponse = await axiosInst.djangoAxiosInst.post(
-                'product/register', imageFormData, {
+                '/product/register', imageFormData, {
                     headers: {
                         'Content-Type' : 'multipart/form-data'
                     }
