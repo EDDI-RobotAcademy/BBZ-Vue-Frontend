@@ -5,7 +5,7 @@
       호텔 등록
     </router-link>
     <v-row v-if="productList.length > 0">
-      <v-col v-for="hotel in hotels" :key="hotel.productId" cols="12" class="mb-4">
+      <v-col v-for="hotel in productList" :key="hotel.productId" cols="12" class="mb-4">
         <v-card>
           <v-card-title>{{ hotel.productName }}</v-card-title>
           <v-card-subtitle>{{ hotel.productLocation }}</v-card-subtitle>
@@ -13,7 +13,7 @@
           <v-card-text>
             <v-row>
               <v-col cols="4">
-                <v-img src="@/assets/images/fixed/mario.png" aspect-ratio="1" class="grey lighten-2">
+                <v-img :src="getImageUrl(hotel.productImageName)" aspect-ratio="1" class="grey lighten-2">
                   <template v-slot:placeholder>
                     <v-row class="fill-height ma-0" align="center" justify="center">
                       <v-progress-circular indeterminate color="grey lighten-5"/>
@@ -56,6 +56,9 @@ export default {
     },
     methods: {
       ...mapActions(productModule, ['requestProductListToDjango']),
+      getImageUrl (imageName) {
+            return require('@/assets/images/uploadImages/' + imageName)
+        },
     },
     data () {
       return {
