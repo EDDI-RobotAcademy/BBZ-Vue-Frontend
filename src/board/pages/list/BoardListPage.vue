@@ -47,7 +47,10 @@ export default {
     methods: {
         ...mapActions(boardModule, ['requestBoardListToDjango']),
         readRow (event, { item }) {
-            console.log('nothing to do!')
+            this.$router.push({
+                name: 'BoardReadPage',
+                params: { boardId: item['boardId'].toString() }
+            })
         }
     },
     data () {
