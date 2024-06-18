@@ -1,0 +1,57 @@
+<template>
+  <v-dialog v-model="dialog" persistent max-width="600px">
+    <v-card>
+      <v-card-title>{{ hotel.name }}</v-card-title>
+      <v-card-text>
+        <p><b>편의시설:</b> {{ hotel.productActivity }}</p>
+        <p><b>다이닝:</b> {{ hotel.productDining }}</p>
+        <p><b>가격:</b> {{ hotel.productPrice }}</p>
+      </v-card-text>
+      <v-card-actions>
+        <v-spacer></v-spacer>
+        <v-btn color="blue darken-1" text @click="bookHotel">예약하기</v-btn>
+        <v-btn color="blue darken-1" text @click="closeDialog">닫기</v-btn>
+      </v-card-actions>
+    </v-card>
+  </v-dialog>
+</template>
+
+<script>
+export default {
+  props: {
+    value: {
+      type: Boolean,
+      default: false,
+    },
+    hotel: {
+      type: Object,
+      required: true,
+    },
+  },
+  data() {
+    return {
+      dialog: this.value,
+    };
+  },
+  watch: {
+    value(val) {
+      this.dialog = val;
+    },
+    dialog(val) {
+      this.$emit('input', val);
+    },
+  },
+  methods: {
+    closeDialog() {
+      this.$emit('close-dialog');
+    },
+    bookHotel() {
+      this.$emit('book-hotel', this.hotel.id);
+    },
+  },
+};
+</script>
+
+<style scoped>
+/* 필요한 스타일을 여기에 추가할 수 있습니다. */
+</style>
