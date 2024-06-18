@@ -1,5 +1,5 @@
 import ProductListPage from "@/product/pages/list/ProductListPage.vue"
-import ProductRegisterPage from "@/product/register/ProductRegisterPage.vue"
+import ProductRegisterPage from "@/product/pages/register/ProductRegisterPage.vue"
 
 const ProductRoutes = [
     {
