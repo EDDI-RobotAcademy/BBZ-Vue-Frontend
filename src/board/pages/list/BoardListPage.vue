@@ -1,6 +1,6 @@
 <template lang="">
     <v-container>
-        <h2>BBZ HOTEL</h2>
+        <h2>BZZ HOTEL</h2>
         <div style="text-align: left; margin: 15px;">
             <router-link :to="{ name: 'BoardRegisterPage' }">
                 게시물 작성
