@@ -10,6 +10,9 @@ export type BoardActions = {
     requestCreateBoardToDjango(context: ActionContext<BoardState, unknown>, payload: {
         title: string, writer: string, content: string
     }): Promise<AxiosResponse>
+    requestModifyBoardToDjango(context: ActionContext<BoardState, any>, payload: {
+        title: string, content: string, boardId: number
+    }): Promise<void>
 }
 
 const actions: BoardActions = {
@@ -48,6 +51,20 @@ const actions: BoardActions = {
             return res.data
         } catch (error) {
             alert('requestCreateBoardToDjango() 문제 발생!')
+            throw error
+        }
+    },
+    async requestModifyBoardToDjango(context: ActionContext<BoardState, any>, payload: {
+        title: string, content: string, boardId: number
+    }): Promise<void> {
+
+        const { title, content, boardId } = payload
+
+        try {
+            await axiosInst.djangoAxiosInst.put(`/board/modify/${boardId}`, {title, content})
+            console.log('수정 성공!')
+        } catch (error) {
+            console.log(' requestModifyBoardToDjango() 과정에서 문제 발생')
             throw error
         }
     }
