@@ -2,17 +2,17 @@
     <v-container>
         <v-row>
             <v-col cols="12">
-                <v-text-field v-model="title" label="제목"/>
+                <v-text-field v-model="title" label="제목" />
             </v-col>
         </v-row>
         <v-row>
             <v-col cols="12">
-                <v-text-field v-model="writer" label="작성자"/>
+                <v-text-field v-model="writer" label="작성자" />
             </v-col>
         </v-row>
         <v-row>
             <v-col cols="12">
-                <v-text-field v-model="content" label="내용" auto-grow/>
+                <v-text-field v-model="content" label="내용" auto-grow />
             </v-col>
         </v-row>
         <v-row>
@@ -30,7 +30,7 @@ import { mapActions } from 'vuex'
 const boardModule = 'boardModule'
 
 export default {
-    data () {
+    data() {
         return {
             title: '',
             writer: '',
@@ -48,6 +48,8 @@ export default {
             }
 
             const board = await this.requestCreateBoardToDjango(payload)
+
+            await this.$router.push({ name: 'BoardReadPage', params: { boardId: board.boardId } })
         },
         async onCancel() {
             console.log('cancel button check')
