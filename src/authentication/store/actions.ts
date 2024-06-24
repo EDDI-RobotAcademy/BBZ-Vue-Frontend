@@ -5,15 +5,17 @@ import axiosInst from "@/utility/axiosInstance"
 
 export type AuthenticationActions = {
     requestKakaoOauthRedirectionToDjango(): Promise<void>
+
+
     requestAccessTokenToDjangoRedirection(
-        context: ActionContext<AuthenticationState, any>,
+        context: ActionContext<AuthenticationState, any>, 
         payload: { code: string }): Promise<void>
     requestUserInfoToDjango(
         context: ActionContext<AuthenticationState, any>): Promise<any>
     requestAddRedisAccessTokenToDjango(
         context: ActionContext<AuthenticationState, any>,
-        { email, accessToken }: { email: string, accessToken: string}
-    ): Promise<any>
+        { email, accessToken }: { email: string, accessToken: string }
+    ): Promise<any>;
 }
 
 const actions: AuthenticationActions = {
@@ -23,7 +25,7 @@ const actions: AuthenticationActions = {
         })
     },
     async requestAccessTokenToDjangoRedirection(
-                context: ActionContext<AuthenticationState, any>,
+                context: ActionContext<AuthenticationState, any>, 
                 payload: { code: string }): Promise<void> {
 
         try {
@@ -39,17 +41,18 @@ const actions: AuthenticationActions = {
         }
     },
     async requestUserInfoToDjango(
-        context: ActionContext<AuthenticationState, any>): Promise<any> {
+            context: ActionContext<AuthenticationState, any>): Promise<any> {
 
         try {
             const accessToken = localStorage.getItem("accessToken");
-            const userInfoResponse: AxiosResponse<any> =
+            const userInfoResponse: AxiosResponse<any> = 
                 await axiosInst.djangoAxiosInst.post(
-                    '/oauth/kakao/user-info',
-                    { access_token: accessToken});
+                    '/oauth/kakao/user-info', 
+                    { access_token: accessToken });
 
             const userInfo = userInfoResponse.data.user_info
-            return userInfo 
+            return userInfo
+
         } catch (error) {
             alert('사용자 정보 가져오기 실패!')
             throw error;
@@ -57,26 +60,25 @@ const actions: AuthenticationActions = {
     },
     async requestAddRedisAccessTokenToDjango(
         { commit, state }: ActionContext<AuthenticationState, any>,
-        { email, accessToken }: { email: string, accessToken: string } 
+        { email, accessToken }: { email: string, accessToken: string }
     ): Promise<any> {
         try {
-            console.log("requestAddRedisAccessTokenToDjango -> email:", email)
-            console.log("requestAddRedisAccessTokenToDjango -> accessToken:", accessToken)
             const response: AxiosResponse<any> = await axiosInst.djangoAxiosInst.post(
                 '/oauth/redis-access-token/', {
                     email: email,
                     accessToken: accessToken
                 });
 
-            console.log('userToken:', response.data)
+            console.log('userToken:', response.data.userToken)
 
-            localStorage.setItem("userToken", response.data)
+            localStorage.setItem("userToken", response.data.userToken)
+            commit('REQUEST_IS_AUTHENTICATED_TO_DJANGO', true);
             return response.data;
         } catch (error) {
             console.error('Error adding redis access token:', error);
             throw error;
         }
     },
-}; 
-    
+};
+
 export default actions;

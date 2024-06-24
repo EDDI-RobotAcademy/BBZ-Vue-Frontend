@@ -13,10 +13,10 @@ export default {
         ...mapActions(authenticationModule, [
             'requestAccessTokenToDjangoRedirection',
             'requestUserInfoToDjango',
-            'requestAddRedisAccessTokenTodjango',
+            'requestAddRedisAccessTokenToDjango',
         ]),
         ...mapActions(accountModule, ['requestEmailDuplicationCheckToDjango']),
-        async setRedirectData() {
+        async setRedirectData () {
             const code = this.$route.query.code
 
             await this.requestAccessTokenToDjangoRedirection({ code })
@@ -24,15 +24,15 @@ export default {
             const email = userInfo.kakao_account.email
             console.log('email:', email)
 
-            const isEmailDuplication =
+            const isEmailDuplication = 
                 await this.requestEmailDuplicationCheckToDjango(email)
+
             if (isEmailDuplication === true) {
                 console.log('기존 가입 고객입니다!')
                 const accessToken = localStorage.getItem("accessToken");
-                console.log('accessToken', accessToken)
 
-                if(accessToken) {
-                    await this.requestAddRedisAccessTokenToDjango({email, accessToken});
+                if (accessToken) {
+                    await this.requestAddRedisAccessTokenToDjango({ email, accessToken });  // Fix: Pass as object directly
                 } else {
                     console.error('AccessToken is missing');
                 }
