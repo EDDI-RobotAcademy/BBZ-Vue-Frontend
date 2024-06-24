@@ -15,6 +15,10 @@
             <v-icon left>mdi-forum</v-icon>
             <span>게시판</span>
         </v-btn>
+        <v-btn v-if="!isLogin" text @click="signIn" class="btn-text">
+            <v-icon left>mdi-login</v-icon>
+            <span>로그인</span>
+        </v-btn>
     </v-app-bar>
 </template>
 
@@ -23,20 +27,25 @@ import '@mdi/font/css/materialdesignicons.css'
 import router from '@/router'
 
 export default {
-    data () {
+    data() {
         return {
             navigation_drawer: false,
+            accessToken: null,
+            isLogin: false,
         }
     },
     methods: {
-        goToHome () {
+        goToHome() {
             router.push('/product/list')
         },
-        goToProductList () {
+        goToProductList() {
             router.push('/product/list')
         },
-        goToBoardList () {
+        goToBoardList() {
             router.push('/board/list')
+        },
+        signIn() {
+            router.push('/account/login')
         },
     },
 }
