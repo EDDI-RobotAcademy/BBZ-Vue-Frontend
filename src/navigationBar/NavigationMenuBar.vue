@@ -36,7 +36,7 @@ export default {
     },
     methods: {
         goToHome() {
-            router.push('/product/list')
+            router.push('/')
         },
         goToProductList() {
             router.push('/product/list')
