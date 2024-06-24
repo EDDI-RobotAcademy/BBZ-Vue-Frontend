@@ -60,14 +60,81 @@ export default {
             formValid: false,
             email: '',
             nickname: '',
+            emailRules: [
+                v => !!v || 'Email 은 필수입니다!',
+                v => /.+@.+\..+/.test(v) || '유효한 Email 주소를 입력하세요!'
+            ],
+            nicknameRules: [v => !!v || 'Nickname은 필수입니다!'],
+            nicknameErrorMessage: [],
+            isNicknameValid: false,
         }
-        
     },
-    async checkNicknameDuplication () {
-        console.log('닉네임 중복 검사 눌럿음')
+    async created () {
+        await this.requestUserInfo()
     },
-    async submitForm () {
-        console.log('신청하기 누름')
+    computed: {
+        isValidForSubmission () {
+            return this.formValid && this.isNicknameValid
+        }
     },
+    methods: {
+        ...mapActions(authenticationModule, [
+            'requestUserInfoToDjango',
+            'requestAddRedisAccessTokenToDjango'
+        ]),
+        ...mapActions(accountModule, [
+            'requestNicknameDuplicationCheckToDjango',
+            'requestCreateNewAccountToDjango',
+        ]),
+        async requestUserInfo () {
+            try {
+                const userInfo = await this.requestUserInfoToDjango()
+                this.email = userInfo.kakao_account.email
+            } catch (error) {
+                console.error('에러:', error)
+                alert('사용자 정보를 가져오는데 실패하였습니다!')
+            }
+        },
+        async checkNicknameDuplication () {
+            console.log('닉네임 중복 검사 눌럿음')
+
+            try {
+                const isDuplicate = await this.requestNicknameDuplicationCheckToDjango({
+                    newNickname: this.nickname.trim()
+                })
+
+                if (isDuplicate) {
+                    this.nicknameErrorMessages = ['이 nickname은 이미 사용중입니다!']
+                    this.isNicknameValid = false
+                } else {
+                    this.nicknameErrorMessages = []
+                    this.isNicknameValid = true
+                }
+            } catch (error) {
+                alert('닉네임 중복 확인에 실패했습니다!')
+                this.isNicknameValid = false
+            }
+        },
+        async submitForm () {
+            console.log('신청하기 누름')
+
+            if (this.$refs.form.validate()) {
+                const accountInfo = {
+                    email: this.email,
+                    nickname: this.nickname,
+                }
+
+                await this.requestCreateNewAccountToDjango(accountInfo)
+                console.log('전송한 데이터:', accountInfo)
+
+                const accessToken = localStorage.getItem("accessToken");
+                const email = accountInfo.email
+                console.log('register submitForm email:', email)
+                await this.requestAddRedisAccessTokenToDjango({ email, accessToken })
+
+                this.$router.push('/')
+            }
+        }
+    }
 }
 </script>
