@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 
 import BoardRoutes from '@/board/router/BoardRoutes'
 import ProductRoutes from '@/product/router/ProductRoutes'
+import AccountRoutes from '@/account/router/AccountRoutes'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -20,6 +21,7 @@ const routes: Array<RouteRecordRaw> = [
   },
   ...BoardRoutes,
   ...ProductRoutes,
+  ...AccountRoutes,
 ]
 
 const router = createRouter({
