@@ -54,6 +54,7 @@ const actions: AuthenticationActions = {
             return userInfo
 
         } catch (error) {
+            console.log("redirection/store/actions.ts")
             alert('사용자 정보 가져오기 실패!')
             throw error;
         }

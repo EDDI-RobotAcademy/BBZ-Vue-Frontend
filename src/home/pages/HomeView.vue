@@ -56,12 +56,12 @@ export default {
   data () {
     return {
       hotelList: [
-        { id: 1, name: 'Photo 1', imageUrl: 'hotel-image.jpg' },
-        { id: 2, name: 'Photo 2', imageUrl: 'hotel-image.jpg' },
-        { id: 3, name: 'Photo 3', imageUrl: 'hotel-image.jpg' },
-        { id: 4, name: 'Photo 4', imageUrl: 'hotel-image.jpg' },
-        { id: 5, name: 'Photo 5', imageUrl: 'hotel-image.jpg' },
-        { id: 6, name: 'Photo 6', imageUrl: 'hotel-image.jpg' },
+        { id: 1, name: 'Photo 1', imageUrl: 'mario.png' },
+        { id: 2, name: 'Photo 2', imageUrl: 'mario.png' },
+        { id: 3, name: 'Photo 3', imageUrl: 'mario.png' },
+        { id: 4, name: 'Photo 4', imageUrl: 'mario.png' },
+        { id: 5, name: 'Photo 5', imageUrl: 'mario.png' },
+        { id: 6, name: 'Photo 6', imageUrl: 'mario.png' },
       ],
       hoveredHotelId: null,
     }
@@ -91,7 +91,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url('@/assets/images/fixed/hotel-image.jpg');
+  background-image: url('@/assets/images/fixed/mario.png');
   background-size: cover;
   background-position: center;
 }
