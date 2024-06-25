@@ -20,7 +20,9 @@ export type AuthenticationActions = {
 
 const actions: AuthenticationActions = {
     async requestKakaoOauthRedirectionToDjango(): Promise<void> {
-        return axiosInst.djangoAxiosInst.get('/oauth/kakao').then((res) => {
+        console.log('requestKakaoOauthRedirectionToDjango()')
+        return axiosInst.djangoAxiosInst.get('/kakaoOauth/kakao').then((res) => {
+            console.log('url:', res.data.url)
             window.location.href = res.data.url
         })
     },
@@ -31,10 +33,11 @@ const actions: AuthenticationActions = {
         try {
             console.log('requestAccessTokenToDjangoRedirection()')
             const { code } = payload
-
+            
             const response = await axiosInst.djangoAxiosInst.post(
-                '/oauth/kakao/access-token', { code })
-            localStorage.setItem("accessToken", response.data.accessToken.access_token)
+                '/kakaoOauth/kakao/access-token', { code })
+            console.log('response:', response)
+            localStorage.setItem("accessToken", response.data.access_token)
         } catch (error) {
             console.log('Access Token 요청 중 문제 발생:', error)
             throw error
@@ -47,7 +50,7 @@ const actions: AuthenticationActions = {
             const accessToken = localStorage.getItem("accessToken");
             const userInfoResponse: AxiosResponse<any> = 
                 await axiosInst.djangoAxiosInst.post(
-                    '/oauth/kakao/user-info', 
+                    '/kakaoOauth/kakao/user-info', 
                     { access_token: accessToken });
 
             const userInfo = userInfoResponse.data.user_info
@@ -64,7 +67,7 @@ const actions: AuthenticationActions = {
     ): Promise<any> {
         try {
             const response: AxiosResponse<any> = await axiosInst.djangoAxiosInst.post(
-                '/oauth/redis-access-token/', {
+                '/kakaoOauth/redis-access-token/', {
                     email: email,
                     accessToken: accessToken
                 });
