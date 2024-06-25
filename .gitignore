@@ -303,3 +303,4 @@ pyrightconfig.json
 # exclude images
 *.png
 *.jpg
+*.jpeg
