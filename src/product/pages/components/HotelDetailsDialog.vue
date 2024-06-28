@@ -9,8 +9,15 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn color="blue darken-1" text @click="bookHotel">예약하기</v-btn>
-        <v-btn color="blue darken-1" text @click="closeDialog">닫기</v-btn>
+        <v-btn color="primary" text @click="bookHotel">
+          <v-icon>mdi-currency-krw</v-icon>
+          <span class="button-text">예약하기</span>
+        </v-btn>
+        <v-btn colo="secondary" text @click="favoriteHotel">
+          <v-icon>mdi-star-box-multiple</v-icon>
+          <span class="button-text">즐겨찾기에 추가</span>
+        </v-btn>
+        <v-btn color="error" text @click="closeDialog">닫기</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -46,8 +53,11 @@ export default {
       this.$emit('close-dialog');
     },
     bookHotel() {
-      this.$emit('book-hotel', this.hotel.id);
+      console.log('예약하기 버튼 누름')
     },
+    favoriteHotel () {
+      console.log('즐겨찾기에 추가 버튼 누름')
+    }
   },
 };
 </script>
