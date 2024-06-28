@@ -1,8 +1,8 @@
 <template>
-    <v-app-bar color="orange" app dark height="64">
+    <v-app-bar color="#333" app dark height="64">
         <v-btn @click="goToHome">
             <v-toolbar-title class="text-uppercase text--darken-4">
-                <span>BBZ Hotel</span>
+                <span class="hero-content">BBZ Hotel</span>
             </v-toolbar-title>
         </v-btn>
         <v-spacer></v-spacer>
