@@ -1,9 +1,10 @@
+import { createStore } from 'vuex'
+
 import boardModule from '@/board/store/boardModule'
 import productModule from '@/product/store/productModule'
 import accountModule from '@/account/store/accountModule'
 import authenticationModule from "@/authentication/store/authenticationModule"
-
-import { createStore } from 'vuex'
+import favoritesModule from '@/favorites/store/favoritesModule'
 
 export default createStore({
   state: {
@@ -19,6 +20,6 @@ export default createStore({
     productModule,
     accountModule,
     authenticationModule,
-
+    favoritesModule,
   }
 })
