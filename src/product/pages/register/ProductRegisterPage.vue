@@ -11,6 +11,7 @@
             </v-row>
         </v-row>
         <v-row>
+            <!-- 편의시설과 레스트랑 태그는 합친 뒤, 체크박스로 리스트 구현하는것이 더 좋아보임 -->
             <v-row cols="12">
                 <v-text-field v-model="productActivity" label="편의 시설" auto-grow/>
             </v-row>
@@ -22,7 +23,8 @@
         </v-row>
         <v-row>
             <v-row cols="12">
-                <v-text-field v-model="productPrice" label="호텔 가격"/>
+                <!-- '호텔 가격' => '최저가'로 변경 -->
+                <v-text-field v-model="productPrice" label="최저가"/>
             </v-row>
         </v-row>
         <v-row>
