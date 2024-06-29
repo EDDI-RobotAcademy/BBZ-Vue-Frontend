@@ -15,9 +15,13 @@
             <v-icon left>mdi-forum</v-icon>
             <span>게시판</span>
         </v-btn>
-        <v-btn v-if="!isLogin" text @click="signIn" class="btn-text">
+        <v-btn v-if="!isAuthenticated" text @click="signIn" class="btn-text">
             <v-icon left>mdi-login</v-icon>
             <span>로그인</span>
+        </v-btn>
+        <v-btn v-if="isAuthenticated" text @click="signOut" class="btn-text">
+            <v-icon left>mdi-logout</v-icon>
+            <span>로그아웃</span>
         </v-btn>
     </v-app-bar>
 </template>
@@ -31,7 +35,7 @@ export default {
         return {
             navigation_drawer: false,
             accessToken: null,
-            isLogin: false,
+            isAuthenticated: false,
         }
     },
     methods: {
@@ -47,6 +51,20 @@ export default {
         signIn() {
             router.push('/account/login')
         },
+        signOut() {
+            console.log('로그아웃 버튼 눌렀음!')
+        }
+    },
+    mounted() {
+        console.log('navigation bar mounted()')
+
+        const userToken = localStorage.getItem("userToken")
+
+        if (userToken) {
+            console.log('You already has a userToken!!!')
+
+            this.$store.state.authenticationModule.isAuthenticated = true
+        }
     },
 }
 </script>
