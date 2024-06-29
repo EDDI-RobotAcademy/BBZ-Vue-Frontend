@@ -13,7 +13,7 @@
           <v-icon>mdi-currency-krw</v-icon>
           <span class="button-text">예약하기</span>
         </v-btn>
-        <v-btn colo="secondary" text @click="favoriteHotel">
+        <v-btn colo="secondary" text @click="favoritesHotel">
           <v-icon>mdi-star-box-multiple</v-icon>
           <span class="button-text">즐겨찾기에 추가</span>
         </v-btn>
@@ -24,6 +24,10 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
+const favoritesModule = 'favoritesModule'
+
 export default {
   props: {
     value: {
@@ -49,14 +53,25 @@ export default {
     },
   },
   methods: {
+    ...mapActions(favoritesModule, ['requestAddFavoritesToDjango']),
     closeDialog() {
       this.$emit('close-dialog');
     },
     bookHotel() {
       console.log('예약하기 버튼 누름')
     },
-    favoriteHotel () {
+    async favoritesHotel() {
       console.log('즐겨찾기에 추가 버튼 누름')
+      try {
+        const favoritesData = {
+          productId: this.hotel.productId,
+        }
+        await this.requestAddFavoritesToDjango(favoritesData)
+        // this.$router.push({ name: 'FavoritesListPage' })
+      } catch (error) {
+        console.log('장바구니 추가 과정에서 에러 발생:', error)
+        throw error
+      }
     }
   },
 };
