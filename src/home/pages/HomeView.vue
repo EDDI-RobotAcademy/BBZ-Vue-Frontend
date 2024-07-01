@@ -50,11 +50,11 @@ export default {
     return {
       hotelList: [
         { id: 1, name: 'Photo 1', imageUrl: 'hotel1.jpeg' },
-        { id: 2, name: 'Photo 2', imageUrl: 'hotel1.jpeg' },
-        { id: 3, name: 'Photo 3', imageUrl: 'hotel1.jpeg' },
-        { id: 4, name: 'Photo 4', imageUrl: 'hotel1.jpeg' },
-        { id: 5, name: 'Photo 5', imageUrl: 'hotel1.jpeg' },
-        { id: 6, name: 'Photo 6', imageUrl: 'hotel1.jpeg' },
+        { id: 2, name: 'Photo 2', imageUrl: 'hotel2.jpeg' },
+        { id: 3, name: 'Photo 3', imageUrl: 'hotel3.jpeg' },
+        { id: 4, name: 'Photo 4', imageUrl: 'hotel4.jpeg' },
+        { id: 5, name: 'Photo 5', imageUrl: 'hotel5.jpeg' },
+        { id: 6, name: 'Photo 6', imageUrl: 'hotel6.jpeg' },
       ],
       hoveredHotelId: null,
     }
