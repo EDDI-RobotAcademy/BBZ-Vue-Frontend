@@ -1,10 +1,10 @@
 <template>
     <v-container fluid fill-height class="mt-15">
         <v-row align="center" justify="center">
-            <text class="title_text1">S</text>
-            <text class="title_text2">IGN &nbsp;</text>  
-            <text class="title_text1">I</text>
-            <text class="title_text2">N</text>
+            <span class="title_text1">S</span>
+            <span class="title_text2">IGN &nbsp;</span>  
+            <span class="title_text1">I</span>
+            <span class="title_text2">N</span>
         </v-row>
         <v-row align="center" justify="center">
             <v-col cols="12" sm="10" md="8" lg="6">
@@ -12,7 +12,7 @@
                     <v-card-text>
                         <v-form>
                             <v-text-field
-                                v-model="Email" label="Email" name="email"
+                                v-model="email" label="Email" name="email"
                                 prepend-icon="mdi-account"
                                 type="text" required
                             ></v-text-field>
@@ -24,7 +24,7 @@
                         </v-form>
                     <v-row align="center" justify="center" class="mt-5 mb-5">
                         <v-btn  :style="{ backgroundColor: '#333', color: 'white', borderRadius: '0' }"
-                                @click="login">Login</v-btn>
+                                @click="selflogin">Login</v-btn>
                     </v-row>
                     </v-card-text>
                 </v-card>
@@ -32,7 +32,7 @@
         </v-row>
                 <v-row align="center" justify="center" class="mt-15">
                     <v-col cols="auto">
-                        <v-text>다른 방법으로 로그인  |</v-text>
+                        <p>다른 방법으로 로그인  |</p>
                     </v-col>
                     <v-col cols="auto" @click="goToKakaoLogin" style="cursor: pointer;">
                         <img class="icon"
@@ -55,10 +55,21 @@ export default {
         const goToKakaoLogin = async () => {
             await store.dispatch('authenticationModule/requestKakaoOauthRedirectionToDjango')
         }
-        return {
-            goToKakaoLogin
+        const selflogin = async () => {
+            // TODO: admin 계정 로그인 구현
         }
-    }
+
+        return {
+            goToKakaoLogin,
+            selflogin
+        }
+    },
+    data () {
+        return {
+            email: '',
+            password: ''
+        }
+    },
 }
 </script>
 
