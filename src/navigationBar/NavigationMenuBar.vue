@@ -29,7 +29,7 @@
 <script>
 import '@mdi/font/css/materialdesignicons.css'
 import router from '@/router'
-import { mapState } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 
 const authenticationModule = 'authenticationModule'
 
@@ -45,6 +45,7 @@ export default {
         ...mapState(authenticationModule, ['isAuthenticated']),
     },
     methods: {
+        ...mapActions(authenticationModule, ['requestLogoutToDjango']),
         goToHome() {
             router.push('/')
         },
@@ -58,7 +59,8 @@ export default {
             router.push('/account/login')
         },
         signOut() {
-            console.log('로그아웃 버튼 눌렀음!')
+            this.requestLogoutToDjango()
+            router.push('/')
         }
     },
     mounted() {
