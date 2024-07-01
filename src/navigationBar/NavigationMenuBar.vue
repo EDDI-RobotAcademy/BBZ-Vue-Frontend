@@ -29,14 +29,20 @@
 <script>
 import '@mdi/font/css/materialdesignicons.css'
 import router from '@/router'
+import { mapState } from 'vuex';
+
+const authenticationModule = 'authenticationModule'
 
 export default {
     data() {
         return {
             navigation_drawer: false,
             accessToken: null,
-            isAuthenticated: false,
+            isLogin: false,
         }
+    },
+    computed: {
+        ...mapState(authenticationModule, ['isAuthenticated']),
     },
     methods: {
         goToHome() {
