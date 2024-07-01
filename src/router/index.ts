@@ -5,6 +5,7 @@ import BoardRoutes from '@/board/router/BoardRoutes'
 import ProductRoutes from '@/product/router/ProductRoutes'
 import AccountRoutes from '@/account/router/AccountRoutes'
 import AuthenticationRoutes from '@/authentication/router/AuthenticationRoutes'
+import FavoritesRoutes from '@/favorites/router/FavoritesRoutes'
 
 const routes: Array<RouteRecordRaw> = [
   ...HomeRoutes,
@@ -12,6 +13,7 @@ const routes: Array<RouteRecordRaw> = [
   ...ProductRoutes,
   ...AccountRoutes,
   ...AuthenticationRoutes,
+  ...FavoritesRoutes,
 ]
 
 const router = createRouter({
