@@ -9,14 +9,13 @@
 
         <v-menu close-on-content-click>
             <template v-slot:activator="{ props }">
-                <v-btn v-if="!isAuthenticated" v-bind="props">
+                <v-btn v-if="isAuthenticated" v-bind="props">
                     <v-icon left> mdi-account</v-icon>
                     <b>회원 메뉴</b>
                 </v-btn>
             </template>
             <v-list>
-                <v-list-item v-for="(item, index) in items"
-                             :key="index" @click="item.action">
+                <v-list-item v-for="(item, index) in items" :key="index" @click="item.action">
                     <v-list-item-title>{{ item.title }}</v-list-item-title>
                 </v-list-item>
             </v-list>
@@ -55,7 +54,7 @@ export default {
             accessToken: null,
             isLogin: !!localStorage.getItem("userToken"),
             items: [
-                { title: '찜목록', action: () => { router.push('/product/list') } },
+                { title: '찜목록', action: () => { router.push('/favorites/list') } },
                 { title: '정보수정', action: () => { router.push('/') } },
                 { title: '분석,추천', action: () => { router.push('/') } },
             ]
