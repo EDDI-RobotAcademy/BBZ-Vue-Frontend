@@ -1,17 +1,18 @@
 <!-- src/components/HotelCard.vue -->
 <template>
-  <v-card @click="showDetails">
+  <v-card @click="showDetails" height="250px" hover="true">
     <!-- 가로 한줄로 엮음 -->
-    <v-row>
-      <v-col cols="4">
+    <v-row rows="12">
+      <v-col cols="4" class="text-center">
         <!-- 이미지만 제일 왼쪽으로 보내고 -->
-        <v-img :src="getImageUrl(hotel.productImageName)" height="200px"></v-img>
+        <!-- 이미지가 상단부에 붙어버리는 상황 발생하는 -->
+          <v-img :src="getImageUrl(hotel.productImageName)" height="250px"></v-img>
       </v-col>
-      <!-- 이미지 왼쪽에 해당하는 부분 -->
+      <!-- 이미지 오른쪽에 해당하는 부분 -->
       <v-col>
         <v-row>
           <v-col>
-            <v-card-title>{{ hotel.productName }}</v-card-title>
+            <v-card-title style="font-weight: bold">{{ hotel.productName }}</v-card-title>
           </v-col>
         </v-row>
         <v-row>
@@ -19,17 +20,17 @@
             <v-card-subtitle>{{ hotel.productLocation }}</v-card-subtitle>
           </v-col>
           <v-col>
-            
+
           </v-col>
           <v-col>
-            <v-text>
-              이곳에는 가격 정보가 들어갈 예정입니다
+            <v-text style="color:red; font-weight:bold">
+              가격정보
             </v-text>
           </v-col>
         </v-row>
         <v-row>
-          <v-card-text>
-            호텔세부정보호텔세부정보호텔세부정보호텔세부정보호텔세부정보호텔세부정보호텔세부정보호텔세부정보호텔세부정보호텔세부정보호텔세부정보호텔세부정보호텔세부정보호텔세부정보호텔세부정보호텔세부정보호텔세부정보호텔세부정보호텔세부정보호텔세부정보호텔세부정보호텔세부정보호텔세부정보호텔세부정보호텔세부정보호텔세부정보호텔세부정보호텔세부정보호텔세부정보호텔세부정보호텔세부정보호텔세부정보호텔세부정보호텔세부정보호텔세부정보호텔세부정보호텔세부정보호텔세부정보호텔세부정보호텔세부정보호텔세부정보호텔세부정보호텔세부정보호텔세부정보호텔세부정보호텔세부정보호텔세부정보호텔세부정보호텔세부정보호텔세부정보호텔세부정보호텔세부정보호텔세부정보호텔세부정보호텔세부정보호텔세부정보
+          <v-card-text style="background-color: #F5F5F5">
+            호텔 세부우 정보오호텔 세부우 정보오호텔 세부우 정보오호텔 세부우 정보오호텔 세부우 정보오호텔 세부우 정보오호텔 세부우 정보오호텔 세부우 정보오호텔 세부우 정보오호텔 세부우 정보오호텔 세부우 정보오호텔 세부우 정보오호텔 세부우 정보오호텔호텔 세부우 정보오호텔 세부우 정보오호텔 세부우 정보오호텔 세부우 정보오호텔 세부우 정보오호텔 세부우 정보오호텔 세부우 정보오호텔 세부우 정보오호텔 세부우 정보오호텔 세부우 정보오호텔 세부우 정보오호텔 세부우 정보오호텔 세부우 정보오호텔 세부우 정보오호텔 세부우 정보오호텔 세부우 정보오호텔 세부우 정보오호텔 세부우 정보오호텔 세부우 정보오호텔 세부우 정보오호텔 세부우 정보오호텔 세부우 정보오호텔 세부우 정보오호텔 세부우 정보오호텔 세부우 정보오호텔 세부우 정보오호텔 세부우 정보오호텔 세부우 정보오호텔 세부우 정보오호텔 세부우 정보오호텔 세부우 정보오호텔 세부우 정보오호텔 세부우 정보오호텔 세부우 정보오호텔 세부우 정보오호텔 세부우 정보오호텔 세부우 정보오호텔 세부우 정보오세부우 정보오호텔 세부우 정보오호텔 세부우 정보오호텔 세부우 정보오
           </v-card-text>
         </v-row>
       </v-col>
