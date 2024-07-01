@@ -13,7 +13,7 @@
 
     <!-- 하단은 호텔 등록하는 버튼 우측으로 밀어버린 코드 -->
     <v-row>
-      <v-col cols="11">
+      <v-col cols="10">
       </v-col>
       <v-btn color="pink">
         <router-link :to="{ name: 'ProductRegisterPage' }">
