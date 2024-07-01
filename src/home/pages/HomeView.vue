@@ -32,10 +32,10 @@
       </v-row>
   </v-cotainer>
 
-  <v-cotainer class="trigger" align="center">
+  <v-container class="trigger" align="center">
     <v-btn size="x-large" 
             color="#a68a64">Book Now</v-btn>
-  </v-cotainer>
+  </v-container>
 
 </template>
 
