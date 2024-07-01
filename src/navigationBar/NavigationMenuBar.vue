@@ -7,6 +7,21 @@
         </v-btn>
         <v-spacer></v-spacer>
 
+        <v-menu close-on-content-click>
+            <template v-slot:activator="{ props }">
+                <v-btn v-if="!isAuthenticated" v-bind="props">
+                    <v-icon left> mdi-account</v-icon>
+                    <b>회원 메뉴</b>
+                </v-btn>
+            </template>
+            <v-list>
+                <v-list-item v-for="(item, index) in items"
+                             :key="index" @click="item.action">
+                    <v-list-item-title>{{ item.title }}</v-list-item-title>
+                </v-list-item>
+            </v-list>
+        </v-menu>
+
         <v-btn text @click="goToProductList" class="btn-text">
             <v-icon left>mdi-bed</v-icon>
             <span>호텔 예약</span>
@@ -38,7 +53,12 @@ export default {
         return {
             navigation_drawer: false,
             accessToken: null,
-            isLogin: false,
+            isLogin: !!localStorage.getItem("userToken"),
+            items: [
+                { title: '찜목록', action: () => { router.push('/product/list') } },
+                { title: '정보수정', action: () => { router.push('/') } },
+                { title: '분석,추천', action: () => { router.push('/') } },
+            ]
         }
     },
     computed: {
