@@ -56,6 +56,10 @@ const actions: AuthenticationActions = {
                     { access_token: accessToken });
 
             const userInfo = userInfoResponse.data.user_info
+            const nickname = userInfo.properties.nickname
+
+            localStorage.setItem('nickname', nickname)
+
             return userInfo
 
         } catch (error) {
@@ -107,6 +111,7 @@ const actions: AuthenticationActions = {
             throw error
         }
         localStorage.removeItem('userToken')
+        localStorage.removeItem('nickname')
     }
 };
 
