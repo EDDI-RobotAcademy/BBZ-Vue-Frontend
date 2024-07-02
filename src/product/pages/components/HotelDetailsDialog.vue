@@ -13,20 +13,35 @@
           <v-icon>mdi-currency-krw</v-icon>
           <span class="button-text">예약하기</span>
         </v-btn>
-        <v-btn color="secondary" text @click="favoritesHotel">
+        <v-btn v-if="this.isAuthenticated" color="secondary" text @click="favoritesHotel">
+          <v-icon>mdi-star-box-multiple</v-icon>
+          <span class="button-text">즐겨찾기에 추가</span>
+        </v-btn>
+        <v-btn v-if="!this.isAuthenticated" color="secondary" text @click="isDialogVisible = true">
           <v-icon>mdi-star-box-multiple</v-icon>
           <span class="button-text">즐겨찾기에 추가</span>
         </v-btn>
         <v-btn color="error" text @click="closeDialog">닫기</v-btn>
       </v-card-actions>
     </v-card>
+    <v-dialog v-model="isDialogVisible" max-width="300">
+      <v-card>
+        <v-card-title>로그인 오류</v-card-title>
+        <v-card-text>로그인 먼저 진행해주세요!</v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="blue darken-1" text @click="loginFirst">OK</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-dialog>
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 
 const favoritesModule = 'favoritesModule'
+const authenticationModule = 'authenticationModule'
 
 export default {
   props: {
@@ -42,6 +57,7 @@ export default {
   data() {
     return {
       dialog: this.value,
+      isDialogVisible: false,
     };
   },
   watch: {
@@ -51,6 +67,9 @@ export default {
     dialog(val) {
       this.$emit('input', val);
     },
+  },
+  computed: {
+    ...mapState(authenticationModule, ['isAuthenticated']),
   },
   methods: {
     ...mapActions(favoritesModule, ['requestAddFavoritesToDjango']),
@@ -72,7 +91,11 @@ export default {
         console.log('장바구니 추가 과정에서 에러 발생:', error)
         throw error
       }
-    }
+    },
+    loginFirst() {
+      this.isDialogVisible = false
+      this.$router.push({ name: 'AccountLoginPage' })
+    },
   },
 };
 </script>
