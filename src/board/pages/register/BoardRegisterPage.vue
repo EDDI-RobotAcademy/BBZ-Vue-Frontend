@@ -7,7 +7,7 @@
         </v-row>
         <v-row>
             <v-col cols="12">
-                <v-text-field v-model="writer" label="작성자" />
+                <v-text-field v-model="writer" readonly label="작성자" />
             </v-col>
         </v-row>
         <v-row>
@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 
 const boardModule = 'boardModule'
 
@@ -33,9 +33,12 @@ export default {
     data() {
         return {
             title: '',
-            writer: '',
+            writer: localStorage.getItem('nickname'),
             content: '',
         }
+    },
+    computed: {
+        ...mapState(boardModule, ['board']),
     },
     methods: {
         ...mapActions(boardModule, ['requestCreateBoardToDjango']),
@@ -52,7 +55,7 @@ export default {
             await this.$router.push({ name: 'BoardReadPage', params: { boardId: board.boardId } })
         },
         async onCancel() {
-            console.log('cancel button check')
+            this.$router.push({ name: 'BoardListPage' })
         }
     }
 }
