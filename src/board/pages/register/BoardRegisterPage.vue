@@ -55,7 +55,7 @@ export default {
             await this.$router.push({ name: 'BoardReadPage', params: { boardId: board.boardId } })
         },
         async onCancel() {
-            console.log('cancel button check')
+            this.$router.push({ name: 'BoardListPage' })
         }
     }
 }
