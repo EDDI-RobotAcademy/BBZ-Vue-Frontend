@@ -13,7 +13,7 @@
           <v-icon>mdi-currency-krw</v-icon>
           <span class="button-text">예약하기</span>
         </v-btn>
-        <v-btn colo="secondary" text @click="favoritesHotel">
+        <v-btn color="secondary" text @click="favoritesHotel">
           <v-icon>mdi-star-box-multiple</v-icon>
           <span class="button-text">즐겨찾기에 추가</span>
         </v-btn>
