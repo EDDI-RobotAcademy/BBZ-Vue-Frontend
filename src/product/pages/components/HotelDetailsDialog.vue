@@ -67,7 +67,7 @@ export default {
           productId: this.hotel.productId,
         }
         await this.requestAddFavoritesToDjango(favoritesData)
-        // this.$router.push({ name: 'FavoritesListPage' })
+        this.$router.push({ name: 'FavoritesListPage' })
       } catch (error) {
         console.log('장바구니 추가 과정에서 에러 발생:', error)
         throw error
