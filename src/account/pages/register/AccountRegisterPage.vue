@@ -1,26 +1,29 @@
 <template>
     <v-container class="register-container" fill-height>
         <v-row align="center" justify="center">
-            <v-col cols="12" md="8" lg="6">
-                <v-card>
-                    <v-card-title>
+            <span class="title_text1">R</span>
+            <span class="title_text2">egister</span>  
+        </v-row>
+        <v-row align="center" justify="center">
+            <v-col cols="12" sm="10" md="8" lg="6">
+                <v-card class="mt-10">
+                    <v-card-title align="center" justify="center" class="mt-3">
                         <!-- 글씨 크기 키웠음 -->
-                        <h2>
-                            <span class="headline">신규 회원 가입</span>
-                        </h2>
+                        <h2 class="headline">신규 회원 가입</h2>
                     </v-card-title>
-                    <v-card-text>
+                    <v-card-text class="mt-5">
                         <v-form ref="form" v-model="formValid" lazy-validation>
-                            <v-text-field v-model="email" label="Email" required :rules="emailRules" :disabled="true" />
+                            <v-text-field v-model="email" label="Email" required :rules="emailRules" :disabled="true" 
+                                            prepend-icon="mdi-account"/>
                             <!-- 닉네임 입력칸/중복검사 버튼 비율 조정 -->
                             <v-row align="center">
                                 <v-col cols="9">
                                     <v-text-field v-model="nickname" label="사용하실 닉네임을 입력하세요..." required
-                                        :rules="nicknameRules" :error-message="nicknameErrorMessages" />
+                                        :rules="nicknameRules" :error-message="nicknameErrorMessages" 
+                                        prepend-icon="mdi-star-four-points"/>
                                 </v-col>
                                 <v-col cols="3">
-                                    <!-- 색상 노란색으로 변경(추후 수정 가능) -->
-                                    <v-btn color="yellow" @click="checkNicknameDuplication" class="check-button" small>
+                                    <v-btn color="#333" @click="checkNicknameDuplication" class="check-button" small>
                                         중복 검사
                                     </v-btn>
                                 </v-col>
@@ -30,7 +33,7 @@
                     <v-card-actions>
                         <!-- 이후 버튼 우측으로 밀어놓기 -->
                         <v-spacer></v-spacer>
-                        <v-btn color="primary" @click="submitForm" :disabled="!isValidForSubmission">
+                        <v-btn color="#333" @click="submitForm" :disabled="!isValidForSubmission">
                             신청하기
                         </v-btn>
                     </v-card-actions>
