@@ -2,11 +2,27 @@
   <v-dialog v-model="dialog" persistent max-width="600px">
     <v-card>
       <v-card-title>{{ hotel.name }}</v-card-title>
-      <v-card-text>
+      <!-- <v-card-text>
         <p><b>편의시설:</b> {{ hotel.productActivity }}</p>
         <p><b>다이닝:</b> {{ hotel.productDining }}</p>
-        <p><b>가격:</b> {{ hotel.productPrice }}</p>
-      </v-card-text>
+        <p><b>가격:</b> {{ hotel.productPrice }}원</p>
+      </v-card-text> -->
+      <v-row>
+        <v-col cols="1"></v-col>
+        <v-col cols="5">
+          <v-text class="bold-font">편의시설</v-text><br>
+          <template v-for="(c, index) in reActivity" :key="index">
+            {{ c }}<br>
+          </template>
+        </v-col>
+        <v-col cols="1"></v-col>
+        <v-col cols="5">
+          <v-text class="bold-font">다이닝</v-text><br>
+          <template v-for="(c, index) in reDining" :key="index">
+            {{ c }}<br>
+          </template>
+        </v-col>
+      </v-row>
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn color="primary" text @click="bookHotel">
@@ -70,6 +86,12 @@ export default {
   },
   computed: {
     ...mapState(authenticationModule, ['isAuthenticated']),
+    reActivity: function () {
+      return this.hotel.productActivity.split("\n")
+    },
+    reDining: function () {
+      return this.hotel.productDining.split("\n")
+    }
   },
   methods: {
     ...mapActions(favoritesModule, ['requestAddFavoritesToDjango']),

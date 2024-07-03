@@ -2,34 +2,34 @@
     <v-container>
         <v-row>
             <v-row cols="12">
-                <v-text-field v-model="productName" label="호텔 이름"/>
+                <v-text-field v-model="productName" label="호텔 이름" />
             </v-row>
         </v-row>
         <v-row>
             <v-row cols="12">
-                <v-text-field v-model="productLocation" label="호텔 위치"/>
+                <v-text-field v-model="productLocation" label="호텔 위치" />
             </v-row>
         </v-row>
         <v-row>
             <!-- 편의시설과 레스트랑 태그는 합친 뒤, 체크박스로 리스트 구현하는것이 더 좋아보임 -->
             <v-row cols="12">
-                <v-text-field v-model="productActivity" label="편의 시설" auto-grow/>
+                <v-textarea v-model="productActivity" label="편의 시설"/>
             </v-row>
         </v-row>
         <v-row>
             <v-row cols="12">
-                <v-text-field v-model="productDining" label="레스토랑" auto-grow/>
+                <v-textarea v-model="productDining" label="레스토랑"/>
             </v-row>
         </v-row>
         <v-row>
             <v-row cols="12">
                 <!-- '호텔 가격' => '최저가'로 변경 -->
-                <v-text-field v-model="productPrice" label="최저가"/>
+                <v-text-field v-model="productPrice" label="최저가" />
             </v-row>
         </v-row>
         <v-row>
             <v-row cols="12">
-                <v-file-input v-model="productImageName" label="호텔 이미지 파일" prepended-icon="mdi-camera"/>
+                <v-file-input v-model="productImageName" label="호텔 이미지 파일" prepended-icon="mdi-camera" />
             </v-row>
         </v-row>
         <v-row>
@@ -52,7 +52,7 @@ import { mapActions } from 'vuex'
 const productModule = 'productModule'
 
 export default {
-    data () {
+    data() {
         return {
             productName: '',
             productLocation: '',
@@ -65,7 +65,7 @@ export default {
     },
     methods: {
         ...mapActions(productModule, ['requestCreateProductToDjango']),
-        async onSubmit () {
+        async onSubmit() {
             try {
                 if (this.productImageName) {
                     const imageFormData = new FormData()
@@ -78,7 +78,7 @@ export default {
                     console.log(imageFormData.productImageName)
                     const response = await this.requestCreateProductToDjango(imageFormData)
                     this.uploadedFileName = response.data.productImageName
-                    this.$router.push({ name: 'ProductListPage'})
+                    this.$router.push({ name: 'ProductListPage' })
                 } else {
                     console.log('이미지 파일을 선택하세요!')
                 }
@@ -86,7 +86,7 @@ export default {
                 console.log('파일 처리 과정에서 에러 발생:', error)
             }
         },
-        async onCancel () {
+        async onCancel() {
             console.log('취소 버튼 눌렀음')
             this.$router.go(-1)
         }

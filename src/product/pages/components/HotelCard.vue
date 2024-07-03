@@ -24,14 +24,14 @@
           </v-col>
           <v-col>
             <v-text style="color:red; font-weight:bold">
-              {{ hotel.productPrice }}
+              {{ hotel.productPrice }}원
             </v-text>
           </v-col>
         </v-row>
         <v-row>
           <v-card-text style="background-color: #F5F5F5">
             <v-row>
-              편의시설 : {{ hotel.productActivity }}
+              편의시설: {{ hotel.productActivity }}
             </v-row>
             <v-row>
               레스토랑 : {{ hotel.productDining }}
@@ -41,23 +41,6 @@
       </v-col>
     </v-row>
   </v-card>
-
-  <!-- 클릭시 발생하는 다이알로그 부분임...! -->
-  <v-dialog v-model="dialog" persistent max-width="600px">
-    <v-card>
-      <v-card-title>{{ hotel.productName }}</v-card-title>
-      <v-card-text>
-        <p><b>편의시설</b> : {{ hotel.productActivity }}</p>
-        <p><b>다이닝</b> : {{ hotel.productDining }}</p>
-        <p><b>가격</b> : {{ hotel.productPrice }}</p>
-      </v-card-text>
-      <v-card-actions>
-        <v-spacer></v-spacer>
-        <v-btn color="blue darken-1" text @click="bookHotel">예약하기</v-btn>
-        <v-btn color="blue darken-1" text @click="dialog = false">닫기</v-btn>
-      </v-card-actions>
-    </v-card>
-  </v-dialog>
 </template>
 
 <script>
