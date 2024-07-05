@@ -91,6 +91,14 @@ export default {
     color: #333;
 }
 
+.title_text3 {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 80px;
+    font-family: 'Gloock';
+    color: #333;
+}
+
 .bold-font {
     font-weight: bolder;
     font-size: 20px;

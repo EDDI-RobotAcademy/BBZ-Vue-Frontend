@@ -26,7 +26,11 @@
       </v-row>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn color="primary" text @click="bookHotel">
+        <v-btn v-if="this.isAuthenticated" color="secondary" text @click="goToSurveyPage">
+          <v-icon>mdi-currency-krw</v-icon>
+          <span class="button-text">예약하기</span>
+        </v-btn>
+        <v-btn v-if="!this.isAuthenticated" color="secondary" text @click="isDialogVisible = true">
           <v-icon>mdi-currency-krw</v-icon>
           <span class="button-text">예약하기</span>
         </v-btn>
@@ -99,8 +103,17 @@ export default {
     closeDialog() {
       this.$emit('close-dialog');
     },
-    bookHotel() {
+    goToSurveyPage() {
       console.log('예약하기 버튼 누름')
+      try {
+        const hotelId = this.hotel.productId
+        const hotelName = this.hotel.productName
+        console.log('hotelName:', hotelName)
+        this.$router.push({ name: 'SurveyRegisterPage', state: { hotelId: hotelId, hotelName: hotelName } })
+      } catch (error) {
+        console.log('예약하기 버튼 누르고나서 에러 발생:', error)
+        throw error
+      }
     },
     async favoritesHotel() {
       console.log('즐겨찾기에 추가 버튼 누름')
