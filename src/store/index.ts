@@ -5,6 +5,7 @@ import productModule from '@/product/store/productModule'
 import accountModule from '@/account/store/accountModule'
 import authenticationModule from "@/authentication/store/authenticationModule"
 import favoritesModule from '@/favorites/store/favoritesModule'
+import surveyModule from '@/survey/store/surveyModule'
 
 export default createStore({
   state: {
@@ -21,5 +22,6 @@ export default createStore({
     accountModule,
     authenticationModule,
     favoritesModule,
+    surveyModule,
   }
 })

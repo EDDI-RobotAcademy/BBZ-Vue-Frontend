@@ -1,6 +1,10 @@
 <template>
   <v-container>
-    <!-- <h2>BZZ Hotels</h2> -->
+    <v-row align="center" justify="center">
+      <h2 class="title_text1">Hotel</h2>
+      <span class="title_text2">&</span>
+      <h2 class="title_text1">Resort</h2>
+    </v-row>
     <v-row v-for="hotel in productList" :key="hotel.productId" cols="12" class="mb-4">
       <v-row v-if="productList.length > 0">
         <v-col cols="12" class="mb-4">

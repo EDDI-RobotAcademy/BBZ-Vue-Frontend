@@ -1,52 +1,51 @@
 <template>
-  <v-cotainer class="hero">
+  <v-container class="hero">
     <div class="hero-content">
       <h1>WALKERHILL</h1>
       <p><br><i>Inspiring Sense & Touching Place</i></p>
     </div>
-  </v-cotainer>
+  </v-container>
 
-  <v-cotainer class="about">
+  <v-container class="about">
     <v-row>
       <v-col cols="12" md="8" offset-md="2" class="about-content pa-10 text-center">
         <h2>About WALKERHILL</h2>
         |
         <p><i>"Inspiring Sense & Touching Place"</i><br><br>
-            워커힐 호텔앤리조트는 여행 속 고객이 원하는 Moment 중심으로 다양한 경험이 가득한 HOTEL이 되겠습니다.<br>
-            자연과 감동 서비스로 고객이 머무는 동안 즐거움, 편안함, 행복함을 느낄 수 있도록 기대 넘는 가치를 약속합니다."</p>
+          워커힐 호텔앤리조트는 여행 속 고객이 원하는 Moment 중심으로 다양한 경험이 가득한 HOTEL이 되겠습니다.<br>
+          자연과 감동 서비스로 고객이 머무는 동안 즐거움, 편안함, 행복함을 느낄 수 있도록 기대 넘는 가치를 약속합니다."</p>
       </v-col>
     </v-row>
-  </v-cotainer>
-
-  <v-cotainer class="hotels">
-      <v-row align="center" justify="center" class="pa-10 ml-5 mr-5">
-        <v-col cols="12" sm="6" md="8" lg="4"
-                v-for="hotel in this.hotelList" :key="hotel">
-            <!-- TODO: v-card 1:1비율로 고정하기 -->
-            <v-card >
-              <v-img cover :src="getImageUrl(hotel.imageUrl)" height="225px">
-                <!-- TODO: hover 기능 구현(마우스 입력 시 호텔 이름 노출) -->
-              </v-img>
-            </v-card>
-        </v-col>
-      </v-row>
-  </v-cotainer>
-
-  <v-container class="trigger" align="center">
-    <v-btn size="x-large" 
-            color="#a68a64">Book Now</v-btn>
+  </v-container>
+  <v-container class="hotels">
+    <v-row align="center" justify="center" class="pa-10 ml-5 mr-5">
+      <v-col cols="12" sm="6" md="8" lg="4" v-for="hotel in this.hotelList" :key="hotel">
+        <!-- TODO: v-card 1:1비율로 고정하기 -->
+        <v-card>
+          <v-img cover :src="getImageUrl(hotel.imageUrl)" height="225px">
+            <!-- TODO: hover 기능 구현(마우스 입력 시 호텔 이름 노출) -->
+          </v-img>
+        </v-card>
+      </v-col>
+    </v-row>
   </v-container>
 
+  <v-container class="trigger" align="center">
+    <v-btn size="x-large" color="#a68a64" @click="goToHotelList">Book Now</v-btn>
+  </v-container>
 </template>
 
 <script>
-export default {  
+export default {
   methods: {
-    getImageUrl (imageName) {
+    getImageUrl(imageName) {
       return require('@/assets/images/fixed/' + imageName)
     },
+    goToHotelList() {
+      this.$router.push({ name: 'ProductListPage' })
+    }
   },
-  data () {
+  data() {
     return {
       hotelList: [
         { id: 1, name: 'Photo 1', imageUrl: 'hotel1.jpeg' },
@@ -64,11 +63,9 @@ export default {
 
 <style>
 /* 구글 폰트 임포트 */
-@import url( 
-  'https://fonts.googleapis.com/css2?family=Taviraj:wght@400;800&display=swap');
-@import url(
-  'https://fonts.googleapis.com/css2?family=Hahmlet:wght@100..900&family=Taviraj:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap'
-  );
+@import url('https://fonts.googleapis.com/css2?family=Taviraj:wght@400;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Hahmlet:wght@100..900&family=Taviraj:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap'
+);
 @import url('https://fonts.googleapis.com/css2?family=Gloock&display=swap');
 
 
@@ -88,7 +85,7 @@ body {
   background-image: url('@/assets/images/fixed/hotel_main.png');
   background-size: cover;
   background-position: center;
-  
+
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -115,5 +112,4 @@ body {
 .trigger {
   padding: 4rem 2rem;
 }
-
 </style>

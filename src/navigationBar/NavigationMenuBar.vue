@@ -2,7 +2,7 @@
     <v-app-bar color="#333" app dark height="64">
         <v-btn @click="goToHome">
             <v-toolbar-title class="text-uppercase text--darken-4">
-                <span class="hero-content">BBZ Hotel</span>
+                <span class="hero-content">Walkerhill</span>
             </v-toolbar-title>
         </v-btn>
         <v-spacer></v-spacer>
