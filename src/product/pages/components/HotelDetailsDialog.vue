@@ -9,7 +9,7 @@
       </v-card-text> -->
       <v-row>
         <v-col cols="1"></v-col>
-        <v-col cols="5">
+        <v-col cols="4">
           <v-text class="bold-font">편의시설</v-text><br>
           <template v-for="(c, index) in reActivity" :key="index">
             {{ c }}<br>
@@ -22,6 +22,7 @@
             {{ c }}<br>
           </template>
         </v-col>
+        <v-col cols="1"></v-col>
       </v-row>
       <v-card-actions>
         <v-spacer></v-spacer>
