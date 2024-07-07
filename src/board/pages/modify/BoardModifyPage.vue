@@ -19,7 +19,7 @@
             <v-col cols="auto">
                 <v-btn class="ml-2" color="primary" @click="onModify">수정 완료</v-btn>
             <v-col cols="auto">
-                <router-link :to="{naem : 'BoardReadPage' }">
+                <router-link :to="{name : 'BoardReadPage' }">
                     <v-btn color="primary"> 취소 </v-btn>
                 </router-link>
             </v-col>
