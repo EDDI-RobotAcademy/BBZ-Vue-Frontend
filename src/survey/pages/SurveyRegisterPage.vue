@@ -36,7 +36,7 @@
             <v-row>
                 <v-col cols="1"></v-col>
                 <v-col cols="12" sm="5">
-                    <v-date-picker v-model="survey.checknDate" title="입실 날짜" required
+                    <v-date-picker v-model="survey.checkInDate" title="입실 날짜" required
                         @update:modelValue="updateCheckInDate" header="날짜를 선택해주세요."></v-date-picker>
                 </v-col>
                 <v-col cols="1"></v-col>
@@ -46,7 +46,10 @@
                 </v-col>
             </v-row>
             <v-row align="center" justify="center">
-                <v-btn type="submit" color="primary">제출</v-btn>
+                <v-col cols="auto">
+                    <v-btn color="primary" @click="submitForm">제출</v-btn>
+
+                </v-col>
             </v-row>
         </v-form>
     </v-container>
@@ -57,6 +60,7 @@ import { ref } from 'vue'
 import { mapActions } from 'vuex'
 
 const surveyModule = 'surveyModule'
+const orderModule = 'orderModule'
 
 export default {
     setup() {
@@ -117,10 +121,24 @@ export default {
                 numOfChild: this.survey.numOfChild,
                 haveBreakfast: this.survey.haveBreakfast,
                 isExistCar: this.survey.isExistCar,
-                lenOfReservation: this.survey.lenOfReservation
+                lenOfReservation: this.survey.lenOfReservation,
+                orderId: this.order.orderId // orderId가 survey에 포함되어야 합니다.
             }
-            const response = await this.requestCreateSurveyToDjango(payload)
-            console.log("제출 버튼 누름")
+
+            try {
+                const response = await this.requestCreateSurveyToDjango(payload)
+                console.log("제출 버튼 누름", response)
+                if (response && response.orderId) {
+                    await this.$router.push({
+                        name: 'OrderReadPage',
+                        params: { orderId: response.orderId.toString() }
+                    })
+                } else {
+                    console.error("응답에 orderId가 포함되어 있지 않습니다.")
+                }
+            } catch (error) {
+                console.error("폼 제출 중 오류 발생:", error)
+            }
         }
     }
 }
