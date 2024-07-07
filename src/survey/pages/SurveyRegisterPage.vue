@@ -114,7 +114,10 @@ export default {
     },
     methods: {
         ...mapActions(surveyModule, ['requestCreateSurveyToDjango']),
+        ...mapActions(orderModule, ['requestCreateOrdersToDjango']),
         async submitForm() {
+            console.log("제출 버튼 누름")
+
             const payload = {
                 productId: this.hotelId,
                 numOfAdult: this.survey.numOfAdult,
@@ -122,22 +125,21 @@ export default {
                 haveBreakfast: this.survey.haveBreakfast,
                 isExistCar: this.survey.isExistCar,
                 lenOfReservation: this.survey.lenOfReservation,
-                orderId: this.order.orderId // orderId가 survey에 포함되어야 합니다.
             }
 
+            await this.requestCreateSurveyToDjango(payload)
+
             try {
-                const response = await this.requestCreateSurveyToDjango(payload)
-                console.log("제출 버튼 누름", response)
-                if (response && response.orderId) {
-                    await this.$router.push({
-                        name: 'OrderReadPage',
-                        params: { orderId: response.orderId.toString() }
-                    })
-                } else {
-                    console.error("응답에 orderId가 포함되어 있지 않습니다.")
+                const userToken = localStorage.getItem('userToken')
+                const productId = this.hotelId
+                const data = {
+                    userToken,
+                    productId
                 }
+                const response = await this.requestCreateOrdersToDjango(data)
+                
             } catch (error) {
-                console.error("폼 제출 중 오류 발생:", error)
+                console.error("requestCreateOrdersToDjango() 중 에러 발생", error)
             }
         }
     }

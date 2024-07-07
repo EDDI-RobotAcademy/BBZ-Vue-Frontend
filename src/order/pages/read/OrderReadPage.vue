@@ -10,25 +10,16 @@
                             <tr>
                                 <th>Product Name</th>
                                 <th>Price</th>
-                                <th>Quantity</th>
-                                <th>Total</th>
                             </tr>
                             </thead>
                             <tbody>
                                 <tr v-for="item in order.order_items" :key="item.productId">
                                     <td>{{ item.product_name }}</td>
                                     <td>{{ item.price }}</td>
-                                    <td>{{ item.quantity }}</td>
-                                    <td>{{ item.price * item.quantity }}</td>
                                 </tr>
                             </tbody>
                         </v-table>
                         <v-divider></v-divider>
-                        <v-row>
-                            <v-col class="text-right">
-                                <strong>Total: {{ orderTotal }}</strong>
-                            </v-col>
-                        </v-row>
                         <v-row>
                             <v-col class="text-right">
                                 <v-btn color="green" @click="goToBack">돌아가기</v-btn>
@@ -56,25 +47,6 @@ export default {
         return {
             order: null,
         };
-    },
-    computed: {
-        orderTotal() {
-            if (!this.order || 
-                    !Array.isArray(this.order.order_items) || 
-                    this.order.order_items.length === 0) {
-                return 0;
-            }
-            return this.order.order_items.reduce(
-                (total, item) => { 
-                    console.log('item.price:', item.price)
-                    console.log('item.quantity:', item.quantity)
-                    const newTotal = total + item.price * item.quantity
-                    console.log('total:', total)
-                    return newTotal
-                },
-                0
-            );
-        }
     },
     methods: {
         ...mapActions("orderModule", ["requestReadOrderToDjango"]),

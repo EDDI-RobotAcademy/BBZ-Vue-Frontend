@@ -4,10 +4,7 @@ export interface OrderState {
 }
 
 export interface OrderItem {
-    orderId: number;
-    cartItemId: number;
-    quantity: number;
-    price: number;
+    productId: number
 }
 
 const state: OrderState = {
