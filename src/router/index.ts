@@ -19,7 +19,6 @@ const routes: Array<RouteRecordRaw> = [
   ...FavoritesRoutes,
   ...SurveyRoutes,
   ...OrderRoutes,
-
 ]
 
 const router = createRouter({

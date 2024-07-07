@@ -4,19 +4,15 @@ import { AxiosResponse } from "axios"
 import axiosInst from "@/utility/axiosInstance"
 
 export type OrderActions = {
-    requestCreateOrderToDjango(
+    requestCreateOrdersToDjango(
         context: ActionContext<OrderState, any>,
         payload: {
-            userToken: string;
-            items: {
-                cartItemId: number;
-                quantity: number;
-                orderPrice: number
-            }[]
+            userToken: string,
+            productId: number
         }
     ): Promise<AxiosResponse>;
 
-    requestReadOrderToDjango(
+    requestReadOrdersToDjango(
         context: ActionContext<OrderState, any>,
         payload: {
             orderId: string
@@ -25,7 +21,7 @@ export type OrderActions = {
 }
 
 const actions: OrderActions = {
-    async requestCreateOrderToDjango({ state }, payload) {
+    async requestCreateOrdersToDjango({ state }, payload) {
         try {
             const userToken = localStorage.getItem('userToken');
             if (!userToken) {
@@ -33,14 +29,10 @@ const actions: OrderActions = {
             }
 
             console.log('payload:', payload)
-
+            const productId = payload.productId
             const requestData = {
                 userToken,
-                items: payload.items.map(item => ({
-                    cartItemId: item.cartItemId,
-                    quantity: item.quantity,
-                    orderPrice: item.orderPrice
-                }))
+                productId
             };
 
             const response =
@@ -54,7 +46,7 @@ const actions: OrderActions = {
         }
     },
 
-    async requestReadOrderToDjango({ state }, payload) {
+    async requestReadOrdersToDjango({ state }, payload) {
         try {
             const userToken = localStorage.getItem('userToken');
             if (!userToken) {
