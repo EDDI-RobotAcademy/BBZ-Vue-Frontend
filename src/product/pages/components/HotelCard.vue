@@ -30,16 +30,16 @@
         </v-row>
         <v-row>
           <v-card-text style="background-color: #F5F5F5">
-            <v-row v-if="hotel.productActivity !== ''">
+            <v-row v-if="hotel.productActivity !== '없음'">
               편의시설 있음
             </v-row>
-            <v-row v-if="hotel.productActivity === ''">
+            <v-row v-else>
               편의시설 없음
             </v-row>
-            <v-row v-if="hotel.productDining !== ''">
+            <v-row v-if="hotel.productDining !== '없음'">
               다이닝 있음
             </v-row>
-            <v-row v-if="hotel.productDining === ''">
+            <v-row v-else>
               다이닝 없음
             </v-row>
           </v-card-text>
