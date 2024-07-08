@@ -7,6 +7,7 @@ import { mapActions } from 'vuex'
 
 const authenticationModule = 'authenticationModule'
 const accountModule = 'accountModule'
+const marketingModule = 'marketingModule'
 
 export default {
     methods: {
@@ -16,6 +17,8 @@ export default {
             'requestAddRedisAccessTokenToDjango',
         ]),
         ...mapActions(accountModule, ['requestEmailDuplicationCheckToDjango']),
+        ...mapActions(marketingModule, ['requestCreateLogToDjango']),
+
         async setRedirectData () {
             const code = this.$route.query.code
 
@@ -47,6 +50,15 @@ export default {
     },
     async created () {
         await this.setRedirectData()
+        const userToken = localStorage.getItem('userToken')
+        if (userToken) {
+        const logData = {
+            userToken: userToken,
+            actionType: 'LOGIN',
+            actionTime: Date.now()
+            }
+        this.requestCreateLogToDjango(logData)
+        }
     }
 }
 </script>

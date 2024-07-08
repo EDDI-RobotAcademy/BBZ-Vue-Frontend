@@ -63,6 +63,7 @@ import { mapActions, mapState } from 'vuex';
 
 const favoritesModule = 'favoritesModule'
 const authenticationModule = 'authenticationModule'
+const marketingModule = 'marketingModule'
 
 export default {
   props: {
@@ -100,6 +101,8 @@ export default {
   },
   methods: {
     ...mapActions(favoritesModule, ['requestAddFavoritesToDjango']),
+    ...mapActions(marketingModule, ['requestCreateLogToDjango']),
+
     closeDialog() {
       this.$emit('close-dialog');
     },
@@ -116,7 +119,17 @@ export default {
       }
     },
     async favoritesHotel() {
-      console.log('즐겨찾기에 추가 버튼 누름')
+      console.log('즐겨찾기에 추가 버튼 누름')  
+      
+      const userToken = localStorage.getItem('userToken')
+      if (userToken) {
+        const logData = {
+            userToken: userToken,
+            actionType: 'BUTTON_FAVORITE',
+            actionTime: Date.now()
+          }
+        this.requestCreateLogToDjango(logData)
+      }
       try {
         const favoritesData = {
           productId: this.hotel.productId,

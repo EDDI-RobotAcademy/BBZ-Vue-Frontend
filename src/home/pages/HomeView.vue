@@ -36,12 +36,27 @@
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex'
+const marketingModule = 'marketingModule'
+
 export default {
   methods: {
+    ...mapActions(marketingModule, ['requestCreateLogToDjango']),
+
     getImageUrl(imageName) {
       return require('@/assets/images/fixed/' + imageName)
     },
-    goToHotelList() {
+    async goToHotelList() {
+      const userToken = localStorage.getItem('userToken')
+      if (userToken) {
+          const logData = {
+              userToken: userToken,
+              actionType: 'ORDER',
+              actionTime: Date.now()
+          }
+          this.requestCreateLogToDjango(logData)
+      }
+      
       this.$router.push({ name: 'ProductListPage' })
     }
   },
@@ -58,6 +73,17 @@ export default {
       hoveredHotelId: null,
     }
   },
+  created() {
+    const userToken = localStorage.getItem('userToken')
+    if (userToken) {
+      const logData = {
+          userToken: userToken,
+          actionType: 'VIEW_HOME',
+          actionTime: Date.now()
+        }
+      this.requestCreateLogToDjango(logData)
+    }
+  }
 }
 </script>
 

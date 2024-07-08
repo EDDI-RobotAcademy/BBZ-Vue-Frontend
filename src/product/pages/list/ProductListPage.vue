@@ -35,6 +35,7 @@ import HotelDetailsDialog from '@/product/pages/components/HotelDetailsDialog.vu
 import { mapActions, mapState } from 'vuex'
 
 const productModule = 'productModule'
+const marketingModule = 'marketingModule'
 
 export default {
   components: {
@@ -49,6 +50,8 @@ export default {
   },
   methods: {
     ...mapActions(productModule, ['requestProductListToDjango']),
+    ...mapActions(marketingModule, ['requestCreateLogToDjango']),
+
     showHotelDetails(hotel) {
       this.selectedHotel = hotel;
       this.dialog = true;
@@ -75,6 +78,17 @@ export default {
       ],
       selectedHotel: {},
       dialog: false,
+    }
+  },
+  created() {
+    const userToken = localStorage.getItem('userToken')
+    if (userToken) {
+      const logData = {
+          userToken: userToken,
+          actionType: 'VIEW_PRODUCT_LIST',
+          actionTime: Date.now()
+        }
+      this.requestCreateLogToDjango(logData)
     }
   },
 }
