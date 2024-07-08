@@ -15,7 +15,7 @@ export type OrderActions = {
     requestReadOrdersToDjango(
         context: ActionContext<OrderState, any>,
         payload: {
-            orderId: string
+            ordersId: number
         }
     ): Promise<AxiosResponse>
 }
@@ -53,14 +53,14 @@ const actions: OrderActions = {
                 throw new Error('User token not found');
             }
 
-            const { orderId } = payload
+            const { ordersId } = payload
 
             const requestData = {
                 userToken,
             }
 
             const response =
-                await axiosInst.djangoAxiosInst.post(`/orders/read/${orderId}`, requestData)
+                await axiosInst.djangoAxiosInst.post(`/orders/read/${ordersId}`, requestData)
             console.log('data:', response.data)
 
             return response.data
