@@ -28,6 +28,9 @@
         </v-card>
       </v-col>
     </v-row>
+    <v-row>
+      <v-img :src="getImageUrl(`potrips.png`)" height="200px" @click="toSponsor"></v-img>
+    </v-row>
   </v-container>
 
   <v-container class="trigger" align="center">
@@ -42,21 +45,24 @@ const marketingModule = 'marketingModule'
 export default {
   methods: {
     ...mapActions(marketingModule, ['requestCreateLogToDjango']),
-
+    toSponsor() {
+      console.log('toSponsor()')
+      this.$router.push('/sponsor/potrips')
+    },
     getImageUrl(imageName) {
       return require('@/assets/images/fixed/' + imageName)
     },
     async goToHotelList() {
       const userToken = localStorage.getItem('userToken')
       if (userToken) {
-          const logData = {
-              userToken: userToken,
-              actionType: 'ORDER',
-              actionTime: Date.now()
-          }
-          this.requestCreateLogToDjango(logData)
+        const logData = {
+          userToken: userToken,
+          actionType: 'ORDER',
+          actionTime: Date.now()
+        }
+        await this.requestCreateLogToDjango(logData)
       }
-      
+
       this.$router.push({ name: 'ProductListPage' })
     }
   },
@@ -77,10 +83,10 @@ export default {
     const userToken = localStorage.getItem('userToken')
     if (userToken) {
       const logData = {
-          userToken: userToken,
-          actionType: 'VIEW_HOME',
-          actionTime: Date.now()
-        }
+        userToken: userToken,
+        actionType: 'VIEW_HOME',
+        actionTime: Date.now()
+      }
       this.requestCreateLogToDjango(logData)
     }
   }
