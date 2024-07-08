@@ -5,18 +5,16 @@
                 <v-card>
                     <v-card-title>주문 상세 내역 보기</v-card-title>
                     <v-card-text>
-                        <v-table v-if="order">
+                        <v-table v-if="orders">
                             <thead>
-                            <tr>
-                                <th>Product Name</th>
-                                <th>Price</th>
-                            </tr>
+                                <tr>
+                                    <th>Product Name</th>
+                                    <th>Price</th>
+                                </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="item in order.order_items" :key="item.productId">
-                                    <td>{{ item.product_name }}</td>
-                                    <td>{{ item.price }}</td>
-                                </tr>
+                                <td>{{ orders.orders_items.product_name }}</td>
+                                <td>{{ orders.orders_items.product_price }}</td>
                             </tbody>
                         </v-table>
                         <v-divider></v-divider>
@@ -39,44 +37,31 @@ const orderModule = 'orderModule'
 export default {
     props: {
         orderId: {
-            type: String,
+            type: Number,
             required: true,
         }
     },
     data() {
         return {
-            order: null,
+            orders: null,
         };
     },
     methods: {
-        ...mapActions("orderModule", ["requestReadOrderToDjango"]),
+        ...mapActions("orderModule", ["requestReadOrdersToDjango"]),
         async fetchOrderData() {
-            const orderId = this.orderId
-            console.log('OrderReadPage orderId:', orderId)
+            const ordersId = this.orderId
+            console.log('OrderReadPage ordersId:', ordersId)
 
             try {
-                const response = await this.requestReadOrderToDjango({ orderId })
-                this.order = response
-                console.log('ordersItemInfo:', this.order)
+                const response = await this.requestReadOrdersToDjango({ ordersId })
+                this.orders = response
+                console.log('ordersItemInfo:', this.orders)
             } catch (error) {
                 console.error('주문 내역 확인 중 에러:', error)
             }
-
-            // // const orderId = this.$route.params.orderId;
-            // // 여기에서 API 호출 또는 Vuex 액션을 통해 주문 데이터를 가져옵니다.
-            // const response = await this.$store.dispatch('fetchOrder', orderId);
-            // this.order = response;
-            // // 여기서는 더미 데이터를 사용합니다.
-            // this.order = {
-            //     orderId: orderId,
-            //     items: [
-            //         { productId: 1, productName: "Product 1", productPrice: 100, quantity: 2 },
-            //         { productId: 2, productName: "Product 2", productPrice: 200, quantity: 1 },
-            //     ]
-            // };
         },
-        goToBack () {
-            this.$router.push({ name: 'HomeView' })
+        goToBack() {
+            this.$router.push('/')
         }
     },
     created() {

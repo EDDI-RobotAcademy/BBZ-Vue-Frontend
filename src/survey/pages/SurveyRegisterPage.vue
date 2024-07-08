@@ -137,7 +137,8 @@ export default {
                     productId
                 }
                 const response = await this.requestCreateOrdersToDjango(data)
-                
+                this.$router.push({ 'name': 'OrderReadPage', params: { orderId: response.toString() } })
+
             } catch (error) {
                 console.error("requestCreateOrdersToDjango() 중 에러 발생", error)
             }
