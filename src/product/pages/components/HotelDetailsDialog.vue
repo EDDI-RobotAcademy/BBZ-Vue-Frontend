@@ -26,6 +26,14 @@
       </v-row>
       <v-card-actions>
         <v-spacer></v-spacer>
+        <v-btn v-if="this.isAuthenticated" color="secondary" text @click="shareHotel">
+          <v-icon>mdi-share-circle</v-icon>
+          <span class="button-text">공유하기</span>
+        </v-btn>
+        <v-btn v-if="!this.isAuthenticated" color="secondary" text @click="isDialogVisible = true">
+          <v-icon>mdi-share-circle</v-icon>
+          <span class="button-text">공유하기</span>
+        </v-btn>
         <v-btn v-if="this.isAuthenticated" color="secondary" text @click="goToSurveyPage">
           <v-icon>mdi-currency-krw</v-icon>
           <span class="button-text">예약하기</span>
@@ -106,6 +114,23 @@ export default {
     closeDialog() {
       this.$emit('close-dialog');
     },
+    async shareHotel() {
+      try {
+        const userToken = localStorage.getItem('userToken')
+        if (userToken) {
+          const logData = {
+            userToken: userToken,
+            actionType: 'BUTTON_REFERRAL',
+            actionTime: Date.now()
+          }
+          await this.requestCreateLogToDjango(logData)
+        }
+
+      } catch (error) {
+        console.log('공유하기 버튼 누르고나서 에러 발생', error)
+        throw error
+      }
+    },
     goToSurveyPage() {
       console.log('예약하기 버튼 누름')
       try {
@@ -119,15 +144,15 @@ export default {
       }
     },
     async favoritesHotel() {
-      console.log('즐겨찾기에 추가 버튼 누름')  
-      
+      console.log('즐겨찾기에 추가 버튼 누름')
+
       const userToken = localStorage.getItem('userToken')
       if (userToken) {
         const logData = {
-            userToken: userToken,
-            actionType: 'BUTTON_FAVORITE',
-            actionTime: Date.now()
-          }
+          userToken: userToken,
+          actionType: 'BUTTON_FAVORITE',
+          actionTime: Date.now()
+        }
         this.requestCreateLogToDjango(logData)
       }
       try {
