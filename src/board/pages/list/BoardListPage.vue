@@ -26,12 +26,12 @@
     </v-container>
 </template>
 
-// npm install axios --legacy-peer-deps
 
 <script>
 import { mapActions, mapState } from 'vuex'
 
 const boardModule = 'boardModule'
+const marketingModule = 'marketingModule'
 
 export default {
     components: {
@@ -50,6 +50,8 @@ export default {
     },
     methods: {
         ...mapActions(boardModule, ['requestBoardListToDjango']),
+        ...mapActions(marketingModule, ['requestCreateLogToDjango']),
+
         readRow(event, { item }) {
             this.$router.push({
                 name: 'BoardReadPage',
@@ -75,6 +77,17 @@ export default {
                 page: 1,
             }
         }
-    }
+    },
+    created() {
+        const userToken = localStorage.getItem('userToken')
+        if (userToken) {
+        const logData = {
+            userToken: userToken,
+            actionType: 'VIEW_BOARD_LIST',
+            actionTime: Date.now()
+            }
+        this.requestCreateLogToDjango(logData)
+        }
+    },
 }
 </script>

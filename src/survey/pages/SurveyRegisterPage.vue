@@ -61,6 +61,7 @@ import { mapActions } from 'vuex'
 
 const surveyModule = 'surveyModule'
 const orderModule = 'orderModule'
+const marketingModule = 'marketingModule'
 
 export default {
     setup() {
@@ -115,8 +116,20 @@ export default {
     methods: {
         ...mapActions(surveyModule, ['requestCreateSurveyToDjango']),
         ...mapActions(orderModule, ['requestCreateOrdersToDjango']),
+        ...mapActions(marketingModule, ['requestCreateLogToDjango']),
+
         async submitForm() {
             console.log("제출 버튼 누름")
+      
+            const userToken = localStorage.getItem('userToken')
+            if (userToken) {
+                const logData = {
+                    userToken: userToken,
+                    actionType: 'ORDER',
+                    actionTime: Date.now()
+                }
+                this.requestCreateLogToDjango(logData)
+            }
 
             const payload = {
                 productId: this.hotelId,

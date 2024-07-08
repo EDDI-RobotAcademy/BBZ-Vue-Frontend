@@ -1,7 +1,8 @@
-import { ActionContext } from "vuex"
+import { ActionContext, mapState } from "vuex"
 import { AccountState } from "./states"
 import { AxiosResponse } from "axios"
 import axiosInst from "@/utility/axiosInstance"
+
 
 export type AccountActions = {
     requestEmailDuplicationCheckToDjango(
