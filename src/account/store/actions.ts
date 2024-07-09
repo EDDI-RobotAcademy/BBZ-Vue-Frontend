@@ -20,6 +20,13 @@ export type AccountActions = {
     requestGetNicknameToDjango(
         context: ActionContext<AccountState, any>
     ): Promise<AxiosResponse>
+    requestAdminLoginToDjango(
+        context: ActionContext<any, any>,
+        loginData: {
+            email: string,
+            password: string
+        }
+    ): Promise<boolean>
 }
 
 const actions: AccountActions = {
@@ -83,6 +90,23 @@ const actions: AccountActions = {
             return response.data
         } catch (error) {
             console.error('requestGetNicknameToDjango() 중 에러 발생:', error)
+            throw error
+        }
+    },
+    async requestAdminLoginToDjango(
+        context: ActionContext<any, any>,
+        loginData: {
+            email: string,
+            password: string
+        }
+    ): Promise<boolean> {
+
+        try {
+            const response = await axiosInst.djangoAxiosInst.post('/account/admin', loginData)
+            console.log("requestAdminLoginToDjango response:", response.data)
+            return response.data
+        } catch (error) {
+            console.error("requestAdminLoginToDjango() 중 에러 발생:", error)
             throw error
         }
     }
