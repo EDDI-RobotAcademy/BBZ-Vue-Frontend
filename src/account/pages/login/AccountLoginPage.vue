@@ -18,7 +18,7 @@
                         </v-form>
                         <v-row align="center" justify="center" class="mt-5 mb-5">
                             <v-btn :style="{ backgroundColor: '#333', color: 'white', borderRadius: '0' }"
-                                @click="selflogin">Login</v-btn>
+                                @click="adminLogin">Login</v-btn>
                         </v-row>
                     </v-card-text>
                 </v-card>
@@ -33,33 +33,76 @@
             </v-col>
         </v-row>
     </v-container>
+    <v-dialog v-model="isDialogVisible" max-width="350">
+        <v-card>
+            <v-card-title>로그인 오류</v-card-title>
+            <v-card-text>아이디 또는 비밀번호가 잘못되었습니다!</v-card-text>
+            <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="blue darken-1" text @click="isDialogVisible = false">OK</v-btn>
+            </v-card-actions>
+        </v-card>
+    </v-dialog>
 </template>
 
 <script>
-import { useStore } from 'vuex'
+import { mapActions, useStore } from 'vuex'
 
+const accountModule = 'accountModule'
 const authenticationModule = 'authenticationModule'
 
 export default {
+    props: {
+        value: {
+            type: Boolean,
+            default: false,
+        },
+        hotel: {
+            type: Object,
+            required: true,
+        },
+    },
+    data() {
+        return {
+            email: '',
+            password: '',
+            dialog: this.value,
+            isDialogVisible: false,
+        }
+    },
+    watch: {
+        value(val) {
+            this.dialog = val;
+        },
+        dialog(val) {
+            this.$emit('input', val);
+        },
+    },
     setup() {
         const store = useStore()
 
         const goToKakaoLogin = async () => {
             await store.dispatch('authenticationModule/requestKakaoOauthRedirectionToDjango')
         }
-        const selflogin = async () => {
-            // TODO: admin 계정 로그인 구현
-        }
 
         return {
             goToKakaoLogin,
-            selflogin
         }
     },
-    data() {
-        return {
-            email: '',
-            password: ''
+    methods: {
+        ...mapActions(accountModule, ['requestAdminLoginToDjango']),
+        async adminLogin() {
+            const loginData = {
+                email: this.email,
+                password: this.password
+            }
+            const response = await this.requestAdminLoginToDjango(loginData)
+            if (response.isAdmin) {
+                localStorage.setItem('isAdmin', true)
+                this.$router.push('/')
+            } else {
+                this.isDialogVisible = true
+            }
         }
     },
 }
