@@ -27,7 +27,7 @@
                             </router-link>
                         </v-col>
                         <v-col cols="auto">
-                            <v-btn color="error" >삭제</v-btn>
+                            <v-btn color="error" @click="onDelete">삭제</v-btn>
                         </v-col>
                         <v-col cols="auto">
                             <router-link :to="{ name: 'BoardListPage' }">
@@ -58,7 +58,12 @@ export default {
     },
     methods: {
         // 'requestDeleteBoardToDjango' 추후 처리 필요
-        ...mapActions(boardModule, ['requestBoardToDjango', ]),
+        ...mapActions(boardModule, ['requestBoardToDjango', 'requestDeleteBoardToDjango']),
+        async onDelete() {
+            console.log('삭제되었습니다.')
+            await this.requestDeleteBoardToDjango(this.boardId)
+            await this.$router.push({ name: 'BoardListPage'})
+        }
     },
     created () {
         this.requestBoardToDjango(this.boardId)
