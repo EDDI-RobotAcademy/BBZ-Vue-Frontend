@@ -10,6 +10,7 @@ export type BoardActions = {
     requestCreateBoardToDjango(context: ActionContext<BoardState, unknown>, payload: {
         title: string, writer: string, content: string
     }): Promise<AxiosResponse>
+    requestDeleteBoardToDjango(context: ActionContext<BoardState, unknown>, boardId: number): Promise<void>
     requestModifyBoardToDjango(context: ActionContext<BoardState, any>, payload: {
         title: string, content: string, boardId: number
     }): Promise<void>
@@ -51,6 +52,16 @@ const actions: BoardActions = {
             return res.data
         } catch (error) {
             alert('requestCreateBoardToDjango() 문제 발생!')
+            throw error
+        }
+    },
+    async requestDeleteBoardToDjango(context: ActionContext<BoardState, unknown>, boardId: number): Promise<void>
+    {
+
+        try {
+            await axiosInst.djangoAxiosInst.delete(`/board/delete/${boardId}`)
+        } catch (error) {
+            console.log('requestDeleteBoardToDjango() 과정에서 문제 발생')
             throw error
         }
     },
