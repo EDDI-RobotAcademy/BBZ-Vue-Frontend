@@ -10,6 +10,7 @@ import SurveyRoutes from '@/survey/router/SurveyRoutes'
 import OrderRoutes from '@/order/router/OrderRoutes'
 import PotripsRoutes from '@/sponsors/router/PotripsRoutes'
 import ReservationAnalysisRoutes from '@/reservationAnalysis/router/ReservationAnalysisRoutes'
+import CustomerChurnAnalysisRoutes from '@/customerChurnAnalysis/router/customerChurnAnalysisRoutes'
 
 
 const routes: Array<RouteRecordRaw> = [
@@ -22,7 +23,8 @@ const routes: Array<RouteRecordRaw> = [
   ...SurveyRoutes,
   ...OrderRoutes,
   ...PotripsRoutes,
-  ...ReservationAnalysisRoutes
+  ...ReservationAnalysisRoutes,
+  ...CustomerChurnAnalysisRoutes
 ]
 
 const router = createRouter({
