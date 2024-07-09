@@ -57,6 +57,7 @@ export default {
                 { title: '찜목록', action: () => { router.push('/favorites/list') } },
                 { title: '정보수정', action: () => { router.push('/') } },
                 { title: '분석,추천', action: () => { router.push('/') } },
+                { title: '관리자 분석페이지', action: () => { router.push('/customer-churn-analysis') } },
             ]
         }
     },
