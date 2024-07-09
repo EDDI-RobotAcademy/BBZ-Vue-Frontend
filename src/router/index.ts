@@ -9,6 +9,7 @@ import FavoritesRoutes from '@/favorites/router/FavoritesRoutes'
 import SurveyRoutes from '@/survey/router/SurveyRoutes'
 import OrderRoutes from '@/order/router/OrderRoutes'
 import PotripsRoutes from '@/sponsors/router/PotripsRoutes'
+import ReservationAnalysisRoutes from '@/reservationAnalysis/router/ReservationAnalysisRoutes'
 
 
 const routes: Array<RouteRecordRaw> = [
@@ -21,6 +22,7 @@ const routes: Array<RouteRecordRaw> = [
   ...SurveyRoutes,
   ...OrderRoutes,
   ...PotripsRoutes,
+  ...ReservationAnalysisRoutes
 ]
 
 const router = createRouter({
