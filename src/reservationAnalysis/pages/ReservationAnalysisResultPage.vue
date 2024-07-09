@@ -10,8 +10,8 @@
         </v-form>
 
         <div if="prediction">
-            <p>Predicted Class: {{ predicted_class }}</p>
-            <p>Predicted Probability: {{ prediction }}</p>
+            <p>추천하는 호텔의 번호: {{ prediction }}</p>
+            
         </div>
     </v-container>
 </template>
@@ -30,7 +30,6 @@ export default {
                 is_exist_car: 0,
             },
             prediction: null,
-            predicted_class: null,
         }
     },
     methods: {
@@ -52,8 +51,7 @@ export default {
                 });
 
                 console.log('prediction:', response.data)
-                this.prediction = response.data.prediction
-                this.predicted_class = response.data.predicted_class
+                this.prediction = response.data
             } catch (error) {
                 alert('서버에서 요청을 처리 할 수 없습니다')
             }
