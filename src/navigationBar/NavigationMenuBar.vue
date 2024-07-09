@@ -29,7 +29,7 @@
             <v-icon left>mdi-forum</v-icon>
             <span>게시판</span>
         </v-btn>
-        <v-btn v-if="!isAuthenticated && !this.isAdmin" text @click="signIn" class="btn-text">
+        <v-btn v-if="!isAuthenticated && !isAdmin" text @click="signIn" class="btn-text">
             <v-icon left>mdi-login</v-icon>
             <span>로그인</span>
         </v-btn>
@@ -53,7 +53,6 @@ export default {
             navigation_drawer: false,
             accessToken: null,
             isLogin: !!localStorage.getItem("userToken"),
-            isAdmin: localStorage.getItem('isAdmin'),
             items: [
                 { title: '찜목록', action: () => { router.push('/favorites/list') } },
                 { title: '정보수정', action: () => { router.push('/') } },
@@ -62,7 +61,7 @@ export default {
         }
     },
     computed: {
-        ...mapState(authenticationModule, ['isAuthenticated']),
+        ...mapState(authenticationModule, ['isAuthenticated', 'isAdmin']),
     },
     methods: {
         ...mapActions(authenticationModule, ['requestLogoutToDjango']),
@@ -79,7 +78,11 @@ export default {
             router.push('/account/login')
         },
         signOut() {
-            this.requestLogoutToDjango()
+            if (this.$store.state.authenticationModule.isAdmin) {
+                this.$store.state.authenticationModule.isAdmin = false
+            } else {
+                this.requestLogoutToDjango()
+            }
             router.push('/')
         }
     },
@@ -87,7 +90,6 @@ export default {
         console.log('navigation bar mounted()')
 
         const userToken = localStorage.getItem("userToken")
-        const isAdmin = localStorage.getItem('isAdmin')
 
         if (userToken) {
             console.log('You already has a userToken!!!')
@@ -95,11 +97,10 @@ export default {
             this.$store.state.authenticationModule.isAuthenticated = true
         }
 
-        if (isAdmin) {
-            console.log('You are admin')
+        if (this.$store.state.authenticationModule.isAdmin) {
             this.isAdmin = true
         }
-
-    },
+        console.log("isAdmin:", this.isAdmin)
+    }
 }
 </script>

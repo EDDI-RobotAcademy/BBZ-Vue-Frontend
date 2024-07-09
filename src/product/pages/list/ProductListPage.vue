@@ -16,25 +16,27 @@
     </v-row>
 
     <!-- 하단은 호텔 등록하는 버튼 우측으로 밀어버린 코드 -->
-    <v-row>
+    <v-row v-if="this.isAdmin">
       <v-col cols="10">
       </v-col>
-      <v-btn color="pink">
-        <router-link :to="{ name: 'ProductRegisterPage' }">
-          호텔 등록
-        </router-link>
-      </v-btn>
+        <v-btn color="pink">
+            <router-link :to="{ name: 'ProductRegisterPage' }">
+              호텔 등록
+            </router-link>
+        </v-btn>
     </v-row>
   </v-container>
 </template>
 
 <script>
+import accountModule from '@/account/store/accountModule';
 import HotelCard from '@/product/pages/components/HotelCard.vue';
 import HotelDetailsDialog from '@/product/pages/components/HotelDetailsDialog.vue';
 
 import { mapActions, mapState } from 'vuex'
 
 const productModule = 'productModule'
+const authenticationModule = 'authenticationModule'
 const marketingModule = 'marketingModule'
 
 export default {
@@ -44,6 +46,7 @@ export default {
   },
   computed: {
     ...mapState(productModule, ['productList']),
+    ...mapState(authenticationModule, ['isAdmin']),
   },
   mounted() {
     this.requestProductListToDjango()
@@ -84,10 +87,10 @@ export default {
     const userToken = localStorage.getItem('userToken')
     if (userToken) {
       const logData = {
-          userToken: userToken,
-          actionType: 'VIEW_PRODUCT_LIST',
-          actionTime: Date.now()
-        }
+        userToken: userToken,
+        actionType: 'VIEW_PRODUCT_LIST',
+        actionTime: Date.now()
+      }
       this.requestCreateLogToDjango(logData)
     }
   },
