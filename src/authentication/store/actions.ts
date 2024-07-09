@@ -90,12 +90,6 @@ const actions: AuthenticationActions = {
         context: ActionContext<AuthenticationState, any>,
         userToken: string
     ): Promise<void> {
-        const isAdmin = localStorage.getItem('isAdmin')
-
-        if (isAdmin) {
-            localStorage.removeItem('isAdmin')
-            return;
-        }
         try {
             const userToken = localStorage.getItem("userToken")
 

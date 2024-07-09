@@ -98,7 +98,7 @@ export default {
             }
             const response = await this.requestAdminLoginToDjango(loginData)
             if (response.isAdmin) {
-                localStorage.setItem('isAdmin', true)
+                this.$store.state.authenticationModule.isAdmin = true
                 this.$router.push('/')
             } else {
                 this.isDialogVisible = true
