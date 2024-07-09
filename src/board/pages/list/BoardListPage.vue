@@ -6,9 +6,11 @@
             <h2 class="title_text1">A</h2>
         </v-row>
         <div style="text-align: left; margin: 15px;">
-            <router-link :to="{ name: 'BoardRegisterPage' }">
-                게시물 작성
-            </router-link>
+            <v-row v-if="this.isAuthenticated">
+                <router-link :to="{ name: 'BoardRegisterPage' }">
+                    게시물 작성
+                </router-link>
+            </v-row>
         </div>
         <v-data-table
             v-model:items-per-page="perPage"
@@ -31,6 +33,7 @@
 import { mapActions, mapState } from 'vuex'
 
 const boardModule = 'boardModule'
+const authenticationModule = 'authenticationModule'
 const marketingModule = 'marketingModule'
 
 export default {
@@ -39,6 +42,7 @@ export default {
     },
     computed: {
         ...mapState(boardModule, ['boards']),
+        ...mapState(authenticationModule, ['isAuthenticated']),
         pagedItems() {
             const startIdx = (this.pagination.page - 1) * this.perPage
             const endIdx = startIdx + this.perPage
