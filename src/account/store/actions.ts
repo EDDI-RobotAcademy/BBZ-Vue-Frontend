@@ -17,6 +17,9 @@ export type AccountActions = {
         context: ActionContext<any, any>,
         accountInfo: { email: string, nickname: string }
     ): Promise<void>
+    requestGetNicknameToDjango(
+        context: ActionContext<AccountState, any>
+    ): Promise<AxiosResponse>
 }
 
 const actions: AccountActions = {
@@ -59,6 +62,27 @@ const actions: AccountActions = {
             await axiosInst.djangoAxiosInst.post('/account/register', accountInfo)
         } catch (error) {
             console.error('신규 계정 생성 실패:', error)
+            throw error
+        }
+    },
+    async requestGetNicknameToDjango(
+        context: ActionContext<AccountState, any>
+    ): Promise<AxiosResponse> {
+        try {
+            const userToken = localStorage.getItem('userToken')
+            if (!userToken) {
+                throw new Error('User token not found!')
+            }
+
+            const requestData = {
+                userToken
+            }
+
+            const response = await axiosInst.djangoAxiosInst.post('/account/get-nickname', requestData)
+            console.log('requestGetNicknameToDjango() response:', response.data)
+            return response.data
+        } catch (error) {
+            console.error('requestGetNicknameToDjango() 중 에러 발생:', error)
             throw error
         }
     }

@@ -28,12 +28,13 @@
 import { mapActions, mapState } from 'vuex'
 
 const boardModule = 'boardModule'
+const accountModule = 'accountModule'
 
 export default {
     data() {
         return {
             title: '',
-            writer: localStorage.getItem('nickname'),
+            writer: this.writer,
             content: '',
         }
     },
@@ -42,6 +43,7 @@ export default {
     },
     methods: {
         ...mapActions(boardModule, ['requestCreateBoardToDjango']),
+        ...mapActions(accountModule, ['requestGetNicknameToDjango']),
         async onSubmit() {
             console.log('submit button check')
             const payload = {
@@ -57,6 +59,10 @@ export default {
         async onCancel() {
             this.$router.push({ name: 'BoardListPage' })
         }
+    },
+    async mounted() {
+        const data = await this.requestGetNicknameToDjango()
+        this.writer = data.nickname
     }
 }
 
