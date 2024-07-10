@@ -6,7 +6,7 @@ const PotripsRoutes = [
         name: "PotripsPage",
         component: PotripsPage,
         beforeEnter() {
-            window.location.href = "http://192.168.0.46:8080/";
+            window.open("http://192.168.0.46:8080/");
         },
     },
 ]
