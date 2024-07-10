@@ -27,10 +27,10 @@ const actions: ProductActions = {
             console.log('requestCreateProductToDjango()')
             const res: AxiosResponse = await axiosInst.djangoAxiosInst.post(
                 '/product/register', imageFormData, {
-                    headers: {
-                        'Content-Type' : 'multipart/form-data'
-                    }
+                headers: {
+                    'Content-Type': 'multipart/form-data'
                 }
+            }
             )
             console.log('응답 데이터:', res.data)
             return res

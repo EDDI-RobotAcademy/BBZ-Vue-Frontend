@@ -87,15 +87,14 @@ export default {
           feature8,
         } = this.form;
         const response = await axiosInst.fastapiAxiosInst.post(
-          'http://localhost:33333/churn-predict', {
-          feature1,
-          feature2,
-          feature3,
-          feature4,
-          feature5,
-          feature6,
-          feature7,
-          feature8,
+
+          '/churn-predict', {
+          num_of_adult,
+          num_of_child,
+          have_breakfast,
+          is_exist_car,
+          len_of_reservation
+
         })
         console.log('prediction:', response.data)
         this.prediction = response.data
@@ -174,8 +173,10 @@ export default {
     
     async doFit() {
       try {
-        const response = await axios.get('http://localhost:33333/logistic-regression');
-        // console.log(response.data);
+
+        const response = await axios.get('/logistic-regression');
+        console.log(response.data);
+
         this.trainStatus = '데이터 학습 성공'
       } catch (error) {
         alert('데이터가 있는지 확인하세요')
