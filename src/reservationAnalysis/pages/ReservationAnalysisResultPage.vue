@@ -1,17 +1,38 @@
 <template>
     <v-container>
-        <v-form @submit.prevent="submitForm">
-            <v-text-field label="쑥빡일쑤" v-model="form.len_of_reservation" type="number" />
-            <v-text-field label="으른 개쑤" v-model="form.num_of_adult" type="number" />
-            <v-text-field label="애들 개쑤" v-model="form.num_of_child" type="number" />
-            <v-text-field label="오빠 차 있어?" v-model="form.is_exist_car" type="number" />
-
-            <v-btn type="submit" color="primary">Predict</v-btn>
+        <v-divider></v-divider>
+        <h1 style="text-align: center; " class="mb-2">호텔 예약 추천 시스템</h1>
+        <v-divider></v-divider>
+        <v-form @submit.prevent="submitForm" class="">
+            <v-row class="ml-4 mb-5 mr-8">
+                <v-col cols="8">
+                    <v-slider focused="true" v-model="form.len_of_reservation" min="2" max="15" step="1"
+                        thumb-label="always" ticks="always" tick-size="5" label="숙박 일수" class="mt-13"></v-slider>
+                </v-col>
+                <v-col cols="4">
+                    <v-container fluid>
+                        <v-radio-group v-model="form.is_exist_car" inline label="차량유무">
+                            <v-radio label="O" :value="1"></v-radio>
+                            <v-radio label="X" :value="0"></v-radio>
+                        </v-radio-group>
+                    </v-container>
+                </v-col>
+            </v-row>
+            <v-row class="mt-7 ml-7 mr-8">
+                <v-slider focused="true" v-model="form.num_of_adult" min="1" max="10" step="1"
+                    thumb-label="always" label="성인 인원"></v-slider>
+                <v-slider focused="true" v-model="form.num_of_child" min="0" max="10" step="1"
+                    thumb-label="always" label="아동인원"></v-slider>
+            </v-row>
+            <v-row class="ml-1">
+                <v-btn type="submit" color="black" class="ml-8 mb-10 mt-1" large raised>Predict</v-btn>
+            </v-row>
         </v-form>
+        <v-divider class="mb-7"></v-divider>
 
         <div if="prediction">
             <p>추천하는 호텔의 번호: {{ prediction }}</p>
-            
+            <p>이곳에는 호텔의 카드가 들어갈 예정입니다</p>
         </div>
     </v-container>
 </template>
@@ -24,8 +45,8 @@ export default {
     data() {
         return {
             form: {
-                len_of_reservation: 1,
-                num_of_adult: 0,
+                len_of_reservation: 2,
+                num_of_adult: 1,
                 num_of_child: 0,
                 is_exist_car: 0,
             },
