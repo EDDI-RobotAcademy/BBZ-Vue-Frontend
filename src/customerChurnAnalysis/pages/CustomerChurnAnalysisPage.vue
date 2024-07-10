@@ -22,30 +22,22 @@
               </v-text-field>
               <v-btn type="submit" color="primary">결과 확인</v-btn>
             </v-form>
-                      <pre>이탈률: {{ prediction }}%</pre>
+                      <v-card-text>이탈률: {{ prediction }}%</v-card-text>
           </v-card-text>
         </v-card>
       </v-col>
       <v-col cols="6">
         <v-card>
-          <p>그래프를 그리는칸</p>
-          <p>그래프를 그리는칸</p>
-          <p>그래프를 그리는칸</p>
-          <p>그래프를 그리는칸</p>
-          <p>그래프를 그리는칸</p>
+          <v-card-title>현재 이탈 예측모델 ROC Curve</v-card-title>
+          <v-img src="./roc_curve.png" />
         </v-card>
-
-
-
 
         <!-- <v-col>
           <v-row>현재 보유 데이터 n건</v-row>
           <div style="margin-bottom: 25px;"></div>
           <v-row><v-btn @click="doFit" color="error">이탈 예측모델 학습</v-btn></v-row>
-        </v-col>
-        <v-row>
+        </v-col> -->
           <v-card-text>{{ trainStatus }}</v-card-text>
-        </v-row> -->
       </v-col>
     </v-row>
 
@@ -69,6 +61,7 @@ import { TrackOpTypes } from 'vue';
 
 
 export default {
+  name: 'RocCurve',
   data() {
     return {
       form: {
@@ -108,7 +101,6 @@ export default {
         }
 
         const response = await axiosInst.fastapiAxiosInst.post(
-
           '/churn-predict', {
           feature1,
           feature2,
