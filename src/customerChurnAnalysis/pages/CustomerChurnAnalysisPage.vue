@@ -6,14 +6,14 @@
           <v-card-title>분석 Form</v-card-title>
           <v-card-text>숫자만 입력 가능합니다
             <v-form @submit.prevent="submitForm">
-              <v-text-field v-model="form.feature1" label="인풋 피처1" @input="checkInputForm"></v-text-field>
-              <v-text-field v-model="form.feature2" label="인풋 피처1" @input="checkInputForm"></v-text-field>
-              <v-text-field v-model="form.feature3" label="인풋 피처1" @input="checkInputForm"></v-text-field>
-              <v-text-field v-model="form.feature4" label="인풋 피처1" @input="checkInputForm"></v-text-field>
-              <v-text-field v-model="form.feature5" label="인풋 피처1" @input="checkInputForm"></v-text-field>
-              <v-text-field v-model="form.feature6" label="인풋 피처1" @input="checkInputForm"></v-text-field>
-              <v-text-field v-model="form.feature7" label="인풋 피처1" @input="checkInputForm"></v-text-field>
-              <v-text-field v-model="form.feature8" label="인풋 피처1" @input="checkInputForm"></v-text-field>
+              <v-text-field v-model="form.feature1" label="피처1-BUTTON_BOOKNOW" @input="checkInputForm"></v-text-field>
+              <v-text-field v-model="form.feature2" label="피처2-BUTTON_FAVORITE" @input="checkInputForm"></v-text-field>
+              <v-text-field v-model="form.feature3" label="피처3-LOGIN" @input="checkInputForm"></v-text-field>
+              <v-text-field v-model="form.feature4" label="피처4-ORDER" @input="checkInputForm"></v-text-field>
+              <v-text-field v-model="form.feature5" label="피처5-REFERRAL" @input="checkInputForm"></v-text-field>
+              <v-text-field v-model="form.feature6" label="피처6-VIEW_BOARD_LIST" @input="checkInputForm"></v-text-field>
+              <v-text-field v-model="form.feature7" label="피처7-VIEW_HOME" @input="checkInputForm"></v-text-field>
+              <v-text-field v-model="form.feature8" label="피처8-VIEW_PRODUCT_LIST" @input="checkInputForm"></v-text-field>
               <v-btn type="submit" color="primary">결과 확인</v-btn>
             </v-form>
           </v-card-text>
