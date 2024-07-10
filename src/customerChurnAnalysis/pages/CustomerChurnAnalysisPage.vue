@@ -26,8 +26,11 @@
         <v-col>
           <v-row>현재 보유 데이터 n건</v-row>
           <div style="margin-bottom: 25px;"></div> <!-- 여백 -->
-          <v-row><v-btn color="error">이탈 예측모델 학습</v-btn></v-row>
+          <v-row><v-btn @click="doFit" color="error">이탈 예측모델 학습</v-btn></v-row>
         </v-col>
+        <v-row>
+          <v-card-text>{{ trainStatus }}</v-card-text>
+        </v-row>
       </v-col>
     </v-row>
 
@@ -62,6 +65,7 @@ export default {
         len_of_reservation: 13,
       },
       prediction: null,
+      trainStatus: null,
     }
   }, methods: {
     async submitForm() {
@@ -84,9 +88,21 @@ export default {
         console.log('prediction:', response.data)
         this.prediction = response.data
       } catch (error) {
-        alert('서버에서 요청을 처리 할 수 없습니다')
+        alert('모델 학습이 되었는지 확인하세요')
       }
     },
+  
+    async doFit() {
+      try {
+        const response = await axios.get('http://localhost:33333/logistic-regression');
+        console.log(response.data);
+        this.trainStatus = '데이터 학습 성공'
+      } catch (error) {
+        alert('데이터가 있는지 확인하세요')
+        console.error('Error:', error);
+      }      
+    }
+  
   }
 }
 </script>

@@ -64,7 +64,7 @@ export default {
                 } = this.form;
 
                 const response = await axiosInst.fastapiAxiosInst.post(
-                    'http://localhost:33333/reservation-predict', {
+                    '/reservation-predict', {
                     len_of_reservation,
                     num_of_adult,
                     num_of_child,
