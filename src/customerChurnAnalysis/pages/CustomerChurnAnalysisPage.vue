@@ -78,7 +78,7 @@ export default {
           len_of_reservation,
         } = this.form;
         const response = await axiosInst.fastapiAxiosInst.post(
-          'http://localhost:33333/churn-predict', {
+          '/churn-predict', {
           num_of_adult,
           num_of_child,
           have_breakfast,
@@ -94,7 +94,7 @@ export default {
   
     async doFit() {
       try {
-        const response = await axios.get('http://localhost:33333/logistic-regression');
+        const response = await axios.get('/logistic-regression');
         console.log(response.data);
         this.trainStatus = '데이터 학습 성공'
       } catch (error) {
