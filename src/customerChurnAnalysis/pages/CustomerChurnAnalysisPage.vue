@@ -1,9 +1,20 @@
 <template>
+    <v-container>
+    <v-row>
+      <v-col>
+        <v-card>
+          <v-btn color="primary">AARRR마케팅 분석 넣는칸</v-btn>
+          <p>마케팅 분석 넣는 칸</p>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
+
   <v-container>
     <v-row>
       <v-col cols="12" md="6">
         <v-card>
-          <v-card-title>분석 Form</v-card-title>
+          <v-card-title>이탈률 예측 Form</v-card-title>
           <v-card-text>숫자만 입력 가능합니다
             <v-form @submit.prevent="submitForm">
               <v-text-field v-for="(feature, index) in features" :key="index" v-model="form[feature]"
@@ -14,6 +25,23 @@
           </v-card-text>
         </v-card>
       </v-col>
+      <v-col cols="6">
+        <v-card>
+          <v-card-title>Data from API</v-card-title>
+          <v-card-text>
+            {{prediction}}%
+          </v-card-text>
+        </v-card>
+        <v-card>
+          <p>그래프를 그리는칸</p>
+          <p>그래프를 그리는칸</p>
+          <p>그래프를 그리는칸</p>
+          <p>그래프를 그리는칸</p>
+          <p>그래프를 그리는칸</p>
+        </v-card>
+
+      </v-col>
+
       <v-col cols="12" md="6">
         <v-card v-if="receivedData">
           <v-card-title>Received Data</v-card-title>
@@ -21,25 +49,15 @@
             <pre>{{ receivedData }}</pre>
           </v-card-text>
         </v-card>
-        <v-col>
+
+        <!-- <v-col>
           <v-row>현재 보유 데이터 n건</v-row>
-          <div style="margin-bottom: 25px;"></div> <!-- 여백 -->
+          <div style="margin-bottom: 25px;"></div>
           <v-row><v-btn @click="doFit" color="error">이탈 예측모델 학습</v-btn></v-row>
         </v-col>
         <v-row>
           <v-card-text>{{ trainStatus }}</v-card-text>
-        </v-row>
-      </v-col>
-    </v-row>
-
-    <v-row>
-      <v-col>
-        <v-card>
-          <v-card-title>Data from API</v-card-title>
-          <v-card-text>이탈 확률:
-            {{ prediction }}%
-          </v-card-text>
-        </v-card>
+        </v-row> -->
       </v-col>
     </v-row>
 
