@@ -1,5 +1,5 @@
 <template>
-    <v-container>
+  <v-container>
     <v-row>
       <v-col>
         <v-card>
@@ -22,14 +22,14 @@
               </v-text-field>
               <v-btn type="submit" color="primary">결과 확인</v-btn>
             </v-form>
-                      <v-card-text>이탈률: {{ prediction }}%</v-card-text>
+            <v-card-text>이탈률: {{ prediction }}%</v-card-text>
           </v-card-text>
         </v-card>
       </v-col>
       <v-col cols="6">
         <v-card>
           <v-card-title>현재 이탈 예측모델 ROC Curve</v-card-title>
-          <v-img src="./roc_curve.png" />
+          <v-img src="@/assets/images/fixed/roc_curve.png" />
         </v-card>
 
         <!-- <v-col>
@@ -37,7 +37,7 @@
           <div style="margin-bottom: 25px;"></div>
           <v-row><v-btn @click="doFit" color="error">이탈 예측모델 학습</v-btn></v-row>
         </v-col> -->
-          <v-card-text>{{ trainStatus }}</v-card-text>
+        <v-card-text>{{ trainStatus }}</v-card-text>
       </v-col>
     </v-row>
 
