@@ -22,17 +22,12 @@
               </v-text-field>
               <v-btn type="submit" color="primary">결과 확인</v-btn>
             </v-form>
+                      <pre>이탈률: {{ prediction }}%</pre>
           </v-card-text>
         </v-card>
       </v-col>
       <v-col cols="6">
         <v-card>
-          <v-card-title>Data from API</v-card-title>
-          <v-card-text>
-            {{prediction}}%
-          </v-card-text>
-        </v-card>
-        <v-card>
           <p>그래프를 그리는칸</p>
           <p>그래프를 그리는칸</p>
           <p>그래프를 그리는칸</p>
@@ -40,15 +35,8 @@
           <p>그래프를 그리는칸</p>
         </v-card>
 
-      </v-col>
 
-      <v-col cols="12" md="6">
-        <v-card v-if="receivedData">
-          <v-card-title>Received Data</v-card-title>
-          <v-card-text>
-            <pre>{{ receivedData }}</pre>
-          </v-card-text>
-        </v-card>
+
 
         <!-- <v-col>
           <v-row>현재 보유 데이터 n건</v-row>
