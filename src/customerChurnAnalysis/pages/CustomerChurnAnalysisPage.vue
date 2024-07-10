@@ -88,18 +88,17 @@ export default {
         console.log('prediction:', response.data)
         this.prediction = response.data
       } catch (error) {
-        alert('서버에서 요청을 처리 할 수 없습니다')
+        alert('모델 학습이 되었는지 확인하세요')
       }
     },
   
     async doFit() {
       try {
         const response = await axios.get('http://localhost:33333/logistic-regression');
-        this.message = '학습 요청이 성공적으로 전송되었습니다!';
         console.log(response.data);
         this.trainStatus = '데이터 학습 성공'
       } catch (error) {
-        this.message = '학습 요청에 실패했습니다.';
+        alert('데이터가 있는지 확인하세요')
         console.error('Error:', error);
       }      
     }
