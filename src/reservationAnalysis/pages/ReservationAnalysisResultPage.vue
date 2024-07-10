@@ -25,7 +25,7 @@
                     label="아동 인원"></v-slider>
             </v-row>
             <v-row class="ml-1">
-                <v-btn type="submit" color="black" class="ml-8 mb-10 mt-1" large raised>Predict</v-btn>
+                <v-btn type="submit" color="#333333" class="ml-8 mb-10 mt-1" large raised>Predict</v-btn>
             </v-row>
         </v-form>
         <v-divider class="mb-7"></v-divider>

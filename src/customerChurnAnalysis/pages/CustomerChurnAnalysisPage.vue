@@ -3,7 +3,7 @@
     <v-row>
       <v-col>
         <v-card>
-          <v-btn color="primary">AARRR마케팅 분석 넣는칸</v-btn>
+          <v-btn color="#333333">AARRR마케팅 분석 넣는칸</v-btn>
           <p>마케팅 분석 넣는 칸</p>
         </v-card>
       </v-col>
@@ -18,9 +18,9 @@
           <v-card-text>숫자만 입력 가능합니다
             <v-form @submit.prevent="submitForm">
               <v-text-field v-for="(feature, index) in features" :key="index" v-model="form[feature]"
-                :label="`${labels[index]}`" @input="checkNumber(feature)">
+                :label="`${labels[index]}`" @input="checkNumber(feature)" density="compact">
               </v-text-field>
-              <v-btn type="submit" color="primary">결과 확인</v-btn>
+              <v-btn type="submit" color="#333333">결과 확인</v-btn>
             </v-form>
             <v-card-text>이탈률: {{ prediction }}%</v-card-text>
           </v-card-text>
