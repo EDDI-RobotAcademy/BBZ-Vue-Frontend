@@ -21,6 +21,11 @@
             </v-list>
         </v-menu>
 
+        <v-btn v-if="isAdmin" text @click="goToChurnAnalysis" class="btn-text">
+            <v-icon left>mdi-file-find</v-icon>
+            <span>이탈율 예측</span>
+        </v-btn>
+
         <v-btn text @click="goToProductList" class="btn-text">
             <v-icon left>mdi-bed</v-icon>
             <span>호텔 예약</span>
@@ -55,9 +60,7 @@ export default {
             isLogin: !!localStorage.getItem("userToken"),
             items: [
                 { title: '찜목록', action: () => { router.push('/favorites/list') } },
-                { title: '정보수정', action: () => { router.push('/') } },
                 { title: 'AI호텔추천', action: () => { router.push('/reservation-analysis-result') } },
-                { title: '관리자 분석페이지', action: () => { router.push('/customer-churn-analysis') } },
             ]
         }
     },
@@ -74,6 +77,9 @@ export default {
         },
         goToBoardList() {
             router.push('/board/list')
+        },
+        goToChurnAnalysis() {
+            router.push('/customer-churn-analysis')
         },
         signIn() {
             router.push('/account/login')
