@@ -1,14 +1,15 @@
 <template>
   <v-container>
     <v-row align="center" justify="center" class="mb-5">
-        <span class="title_text2">Analysis</span>
+      <span class="title_text2">Analysis</span>
     </v-row>
     <v-row>
       <v-col>
-        <v-card align="center" justify="center" >
+        <v-card align="center" justify="center">
           <v-card-title>• AARRR 퍼널 분석</v-card-title>
-            <svg loading ref="chart" class="chart-container"></svg>
-            <v-card-text>*** <b>acquisition</b> : 사용자 획득률, <b>activation</b> : 사용자 활성화율, <b>retention</b> : 사용자 유지율, <b>revenue</b> : 수익, <b>referral</b> : 추천 전환율</v-card-text>
+          <svg loading ref="chart" class="chart-container"></svg>
+          <v-card-text>*** <b>acquisition</b> : 사용자 획득률, <b>activation</b> : 사용자 활성화율, <b>retention</b> : 사용자 유지율,
+            <b>revenue</b> : 수익, <b>referral</b> : 추천 전환율</v-card-text>
         </v-card>
       </v-col>
     </v-row>
@@ -25,7 +26,7 @@
               </v-text-field>
               <v-btn type="submit" color="primary">결과 확인</v-btn>
             </v-form>
-                      <pre>이탈률: {{ prediction }}%</pre>
+            <pre>이탈률: {{ prediction }}%</pre>
           </v-card-text>
         </v-card>
       </v-col>
@@ -44,9 +45,7 @@
         <v-card-text>Form을 전부 다 채워주세요!</v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="error" text @click="isDialogVisible = false"
-            >Close</v-btn
-          >
+          <v-btn color="error" text @click="isDialogVisible = false">Close</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -166,10 +165,10 @@ export default {
         .attr("y", (d, i) => y(key[i]) + y.bandwidth() / 2)
         .attr("alignment-baseline", "middle")
         .text((d, i) => {
-              const percentChange = i > 0 ? - (((data[i + 1] / data[4]) * 100 - (d / data[4]) * 100).toFixed(2)) : "0.00";
-              return `${key[i]} (${isNaN(percentChange) ? "0.00" : percentChange}%)`;
+          const percentChange = i >= 0 ? - (((data[i + 1] / data[4]) * 100 - (d / data[4]) * 100).toFixed(2)) : "0.00";
+          return `${key[i]} (${isNaN(percentChange) ? "0.00" : percentChange}%)`;
         })
-  },
+    },
 
     ...mapActions(marketingModule, ["requestMarketingListToDjango"]),
 
@@ -251,14 +250,19 @@ export default {
 <style scoped>
 .chart-container {
   width: 100%;
-  height: 400px; /* 원하는 높이로 설정 */
+  height: 400px;
+  /* 원하는 높이로 설정 */
 }
+
 .v-card {
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
   transition: box-shadow 0.3s ease-in-out;
 }
+
 .v-card-title {
-  font-size: 25px; /* 글자 크기 설정 */
-  font-weight: bold; /* 글자 굵기 설정 (선택사항) */
+  font-size: 25px;
+  /* 글자 크기 설정 */
+  font-weight: bold;
+  /* 글자 굵기 설정 (선택사항) */
 }
 </style>
